@@ -1,4 +1,3 @@
-import React from 'react'
 import SingleNote from '../components/SingleNote';
 import Masonry from 'react-masonry-css'
 
