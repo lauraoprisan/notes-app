@@ -1,25 +1,20 @@
+
 /* General styles*/
 * {
     margin:0;
     padding:0;
     box-sizing: border-box;
     cursor: inherit;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.8rem;
+    letter-spacing: 0.2px;
+    line-height: 1.3;
 }
 
 html {
     font-size:62.5%;
 }
 
-body{
-    font-size: 1.8rem;
-    letter-spacing: 0.2px;
-    line-height: 1.3;
-
-}
-
-h2 {
-    font-size: 1.8rem;
-}
 
 ul{
     list-style: none;
@@ -186,6 +181,46 @@ ul{
 
 
 /* /Single note*/
+
+/* ^Create note form*/
+.create-note-form{
+    margin-bottom:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:100%;
+    max-width:600px;
+}
+
+.create-note-form input {
+    background-color: transparent;
+    padding:10px;
+}
+.create-note-description-input {
+    border: 1px solid black;
+    border-radius: 5px;
+
+}
+
+.create-note-title-input {
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+.create-note-form.focused input {
+    outline: none;
+    border:none
+}
+
+.create-note-form.focused {
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.432);
+    border-radius:5px;
+    padding:10px 0;
+}
+
+
+/* /Create note form*/
 
 
 

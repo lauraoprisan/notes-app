@@ -4,10 +4,9 @@ import PageLayout from './Layout/PageLayout';
 import NotesPage from './pages/NotesPage';
 import AuthPage from './pages/AuthPage';
 
-function App () {
+const App : React.FC =  () => {
 
   const user:boolean=true;
-
 
   return (
     <div className="main-container">

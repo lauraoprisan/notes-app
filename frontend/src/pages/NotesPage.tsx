@@ -1,7 +1,14 @@
+import { useEffect } from 'react';
 import SingleNote from '../components/SingleNote';
 import Masonry from 'react-masonry-css'
+import CreateNoteForm from '../components/notes/CreateNoteForm';
+import { useNotesContext } from '../hooks/useNotesContext';
+import useFetchData from '../hooks/useFetchData';
 
 const NotesPage = () => {
+
+	const {getNotes, isLoading} = useFetchData()
+	const {notes} = useNotesContext()
 
     const breakpointColumnsObj = {
         default: 4,
@@ -10,24 +17,30 @@ const NotesPage = () => {
         670: 1
       };
 
-  return (
-    <div className="inside-container">
-    <div className="elements-container masonry-grid">
-      <Masonry
-         breakpointCols={breakpointColumnsObj}
-         className="my-masonry-grid"
-         columnClassName="my-masonry-grid_column"
-      >
-          <SingleNote num={0}/>
-          <SingleNote num={1}/>
-          <SingleNote num={2}/>
-          <SingleNote num={3}/>
-          <SingleNote num={4}/>
-          <SingleNote num={5}/>
-      </Masonry>
-    </div>
-  </div>
-  )
+	useEffect(()=>{
+		getNotes()
+	},[])
+
+	return (
+		<div className="inside-container">
+		<CreateNoteForm/>
+		{isLoading && <span>Loading</span>}
+		{!isLoading && (
+			<div className="elements-container masonry-grid">
+				{notes?.length === 0 && <p>You have no notes</p>}
+				<Masonry
+				breakpointCols={breakpointColumnsObj}
+				className="my-masonry-grid"
+				columnClassName="my-masonry-grid_column"
+				>
+				{notes?.map(note => (
+					<SingleNote key={note._id} note={note}/>
+				))}
+				</Masonry>
+			</div>
+		)}
+		</div>
+	)
 }
 
 export default NotesPage
