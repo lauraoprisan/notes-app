@@ -1,21 +1,47 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
+import helmet from 'helmet';
+import mongoose from 'mongoose'; // Importing mongoose as an ES module
+import notesRoutes from './routes/notesRoutes.js';
 
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
-app.use(express.json()); // Body-parser for raw JSON, attaches data to req.body
-app.use(express.urlencoded({ extended: false })); // For urlencoded
+//implementing helmet
+
+const PORT = process.env.PORT || 4000;
+const MONGO_URI = process.env.MONGO_URI as string; // Ensure MONGO_URI is defined in your .env file
+
+
+
+// Configure CORS
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200, // Some legacy browsers choke on 204
+};
+app.use(cors(corsOptions));
+app.use(helmet())
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/api/", (req: Request, res: Response) => {
-    res.send("Welcom to the backend");
+    res.send("Welcome to the backend");
 });
 
+app.use("/api/notes", notesRoutes);
 
-app.listen(PORT, () => {
-    console.log(`Server is listening on port ${PORT}`);
-});
+mongoose.connect(MONGO_URI)
+    .then(() => {
+        console.log("The app is connected to MongoDB");
+        app.listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+        });
+    })
+    .catch((error: any) => {
+        console.error("MongoDB connection error:", error);
+    });
 
 export default app;
