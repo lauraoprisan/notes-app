@@ -3,10 +3,12 @@ import './App.css';
 import PageLayout from './Layout/PageLayout';
 import NotesPage from './pages/NotesPage';
 import AuthPage from './pages/AuthPage';
+import { useAuthContext } from './hooks/useAuthContext';
 
 const App : React.FC =  () => {
 
-  const user:boolean=true;
+  const { user } = useAuthContext()
+  console.log("user", user)
 
   return (
     <div className="main-container">

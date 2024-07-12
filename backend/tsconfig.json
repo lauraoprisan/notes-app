@@ -13,7 +13,7 @@
     "baseUrl": "src",
     "noImplicitAny": true,
     "sourceMap": true,
-    
+
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]

@@ -2,8 +2,9 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import helmet from 'helmet';
-import mongoose from 'mongoose'; // Importing mongoose as an ES module
+import mongoose from 'mongoose';
 import notesRoutes from './routes/notesRoutes.js';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ const app = express();
 //implementing helmet
 
 const PORT = process.env.PORT || 4000;
-const MONGO_URI = process.env.MONGO_URI as string; // Ensure MONGO_URI is defined in your .env file
+const MONGO_URI = process.env.MONGO_URI as string;
+
 
 
 
@@ -32,6 +34,7 @@ app.get("/api/", (req: Request, res: Response) => {
 });
 
 app.use("/api/notes", notesRoutes);
+app.use("/api/auth", authRoutes);
 
 mongoose.connect(MONGO_URI)
     .then(() => {
