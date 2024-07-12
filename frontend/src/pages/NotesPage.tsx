@@ -3,7 +3,7 @@ import SingleNote from '../components/SingleNote';
 import Masonry from 'react-masonry-css'
 import CreateNoteForm from '../components/notes/CreateNoteForm';
 import { useNotesContext } from '../hooks/useNotesContext';
-import useFetchData from '../hooks/useFetchData';
+import useFetchData from '../hooks/useNoteCRUD';
 
 const NotesPage = () => {
 
@@ -17,6 +17,7 @@ const NotesPage = () => {
         670: 1
       };
 
+	// get the notes from the DB and store them in the state manager when first loading the component
 	useEffect(()=>{
 		getNotes()
 	},[])
