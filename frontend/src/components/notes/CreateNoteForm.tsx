@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { NoteInput, Note } from '../../types';
-import { useNotesContext } from '../../hooks/useNotesContext';
 import { useDebounce } from '../../hooks/useDebounce';
 import useNoteCRUD from '../../hooks/useNoteCRUD';
 
@@ -15,12 +13,22 @@ enum NoteStatus {
     Created,
 }
 
-const CreateNoteForm = () => {
+interface CreateNoteFormProps {
+	setCanGetLocalNotes: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+
+  const CreateNoteForm: React.FC<CreateNoteFormProps> = ({ setCanGetLocalNotes }) => {
 	const [isFocused, setIsFocused] = useState<boolean>(false);
 	const formRef = useRef<HTMLFormElement | null>(null);
 	const {postNote, putNote, deleteNote} = useNoteCRUD();
 	const [currentNoteId, setCurrentNoteId] = useState<string | undefined>()
 	const [noteStatus, setNoteStatus] = useState<NoteStatus>(NoteStatus.NotCreated)
+	const [clickedOutsideForm, setClickedOutsideForm] = useState<boolean>(false)
+	const [noteCreatedOrUpdated, setNoteCreatedOrUpdated] = useState<boolean>(false);
+
+	const canGetLocalNotes = noteCreatedOrUpdated && clickedOutsideForm;
+
+	console.log("CreateNoteForm rerendered")
 
 	const [formData, setFormData] = useState<FormData>({
 		title: null,
@@ -30,9 +38,6 @@ const CreateNoteForm = () => {
 	const debouncedFormData = useDebounce(formData);
 
     useEffect(() => {
-        console.log("useEffect called from CreateNoteForm");
-        console.log("debouncedFormData from CreateNoteForm", debouncedFormData);
-
         const currentNote: NoteInput = {
             title: debouncedFormData.title,
             content: debouncedFormData.content,
@@ -43,6 +48,7 @@ const CreateNoteForm = () => {
                 const noteIdFromDB = await postNote(currentNote);
                 setCurrentNoteId(noteIdFromDB);
                 setNoteStatus(NoteStatus.Created);
+				setNoteCreatedOrUpdated(true)
             } else if (noteStatus === NoteStatus.Created && (debouncedFormData.title || debouncedFormData.content)) {
                 if (currentNoteId) {
                 	await putNote(currentNoteId, currentNote);
@@ -53,7 +59,10 @@ const CreateNoteForm = () => {
                 if (currentNoteId) {
                     await deleteNote(currentNoteId);
                     setNoteStatus(NoteStatus.NotCreated);
-                }
+					setNoteCreatedOrUpdated(false)
+                } else {
+					console.log("Error: something went wrong. There is no id")
+				}
             }
         };
 
@@ -64,26 +73,35 @@ const CreateNoteForm = () => {
   // For when the input is on focus
 	const handleShowFullForm = () => {
 		setIsFocused(true);
+		setClickedOutsideForm(false)
 	};
 
   // When clicking outside the form, set the focus to false
-	const handleClickOutside = (e: MouseEvent) => {
+	const handleClickOutside = useCallback((e: MouseEvent) => {
 		if (formRef.current && !formRef.current.contains(e.target as Node)) {
-		setIsFocused(false)
+		setIsFocused(false);
+
 		setFormData({
 			title: null,
 			content: null
 		});
-		setNoteStatus(NoteStatus.NotCreated)
+		setNoteStatus(NoteStatus.NotCreated);
+
+		if (noteCreatedOrUpdated) {
+			setCanGetLocalNotes(true);
 		}
-	};
+		// Reset the state
+		setNoteCreatedOrUpdated(false);
+		}
+
+	}, [noteCreatedOrUpdated, setCanGetLocalNotes]);
 
 	useEffect(() => {
 		document.addEventListener('mousedown', handleClickOutside);
 		return () => {
 		document.removeEventListener('mousedown', handleClickOutside);
 		};
-	}, []);
+	}, [handleClickOutside]);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;

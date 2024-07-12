@@ -3,6 +3,7 @@ import { Note } from '../types';
 
 export interface NotesContextType {
     notes: Note[] | null,
+    getNotesFromLocal: () =>  Note[] | null,
     addNotes: (notesFromDatabase: Note[]) => void,
     addNote: (newNote: Note) => void,
     updateNote: (updatedNote: Note) => void,
@@ -18,7 +19,9 @@ const NotesContext = createContext<NotesContextType | undefined>(undefined);
 export const NotesProvider: React.FC<NotesProviderProps> = ({ children }) => {
     const [notes, setNotes] = useState<Note[] | null>(null);
 
-    console.log("notes from NotesContext", notes)
+    const getNotesFromLocal = () => {
+         return notes
+    }
 
     const addNotes =  (notesFromDatabase: Note[] | null) => {
         setNotes(notesFromDatabase)
@@ -45,6 +48,7 @@ export const NotesProvider: React.FC<NotesProviderProps> = ({ children }) => {
     return (
         <NotesContext.Provider value={{
             notes,
+            getNotesFromLocal,
             addNotes,
             addNote,
             updateNote,
