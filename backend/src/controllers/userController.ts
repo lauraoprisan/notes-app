@@ -21,19 +21,14 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
     const token = createToken(_id as string);
 
     res.status(200).json({
-        message: "Login successful",
         email,
         username,
         token,
         _id
     });
 
-  } catch (error) {
-        if (error instanceof Error) {
-        res.status(400).json({ error: error.message });
-        } else {
-        res.status(400).json({ error: 'An unknown error occurred' });
-    }
+  } catch (error: any) {
+      res.status(400).json({error: error.message})
   }
 };
 
@@ -49,20 +44,15 @@ const signupUser = async (req: Request, res: Response): Promise<void> => {
     const token = createToken(_id as string);
 
     res.status(200).json({
-        message: "Signin successful",
         email,
         username,
         token,
         _id
     });
 
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(400).json({ error: error.message });
-    } else {
-      res.status(400).json({ error: 'An unknown error occurred' });
-    }
-  }
+  } catch (error: any) {
+    res.status(400).json({error: error.message})
+}
 };
 
 export { signupUser, loginUser };

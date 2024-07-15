@@ -26,7 +26,7 @@ interface CreateNoteFormProps {
 	const [clickedOutsideForm, setClickedOutsideForm] = useState<boolean>(false)
 	const [noteCreatedOrUpdated, setNoteCreatedOrUpdated] = useState<boolean>(false);
 
-	const canGetLocalNotes = noteCreatedOrUpdated && clickedOutsideForm;
+
 
 	console.log("CreateNoteForm rerendered")
 
@@ -89,9 +89,9 @@ interface CreateNoteFormProps {
 
 		if (noteCreatedOrUpdated) {
 			setCanGetLocalNotes(true);
+			setNoteCreatedOrUpdated(false);
 		}
-		// Reset the state
-		setNoteCreatedOrUpdated(false);
+
 		}
 
 	}, [noteCreatedOrUpdated, setCanGetLocalNotes]);
@@ -102,6 +102,20 @@ interface CreateNoteFormProps {
 		document.removeEventListener('mousedown', handleClickOutside);
 		};
 	}, [handleClickOutside]);
+
+
+	/**
+	 	useEffect(() => {
+		if(isFocused){
+			document.addEventListener('mousedown', handleClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isFocused]);
+	 */
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;

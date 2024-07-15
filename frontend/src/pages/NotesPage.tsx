@@ -39,24 +39,24 @@ import { Note } from '../types';
 
 	return (
 		<div className="inside-container">
-		<CreateNoteForm
-			setCanGetLocalNotes={setCanGetLocalNotes}
-		/>
-		{isLoading && <span>Loading</span>}
-		{!isLoading && (
-			<div className="elements-container masonry-grid">
-				{notesToShow?.length === 0 && <p>You have no notes</p>}
-				<Masonry
-				breakpointCols={breakpointColumnsObj}
-				className="my-masonry-grid"
-				columnClassName="my-masonry-grid_column"
-				>
-				{notesToShow?.map(note => (
-					<SingleNote key={note._id} note={note}/>
-				))}
-				</Masonry>
-			</div>
-		)}
+			<CreateNoteForm
+				setCanGetLocalNotes={setCanGetLocalNotes}
+			/>
+			{isLoading && <span>Loading</span>}
+			{!isLoading && (
+				<div className="elements-container masonry-grid">
+					{notesToShow?.length === 0 && <p>You have no notes</p>}
+					<Masonry
+					breakpointCols={breakpointColumnsObj}
+					className="my-masonry-grid"
+					columnClassName="my-masonry-grid_column"
+					>
+						{notesToShow?.map(note => (
+							<SingleNote key={note._id} note={note}/>
+						))}
+					</Masonry>
+				</div>
+			)}
 		</div>
 	)
 }

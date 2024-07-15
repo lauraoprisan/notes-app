@@ -12,12 +12,12 @@ const App : React.FC =  () => {
 
   return (
     <div className="main-container">
-      <PageLayout>
-        <Routes>
-          <Route path="/" element={user ?  <NotesPage/> : <Navigate to="/authentication"/> }/>
-          <Route path="/authentication" element={!user ? <AuthPage/> : <Navigate to="/"/> }/>
-        </Routes>
-      </PageLayout>
+		<PageLayout>
+			<Routes>
+				<Route path="/" element={user ?  <NotesPage/> : <Navigate to="/authentication"/> }/>
+				<Route path="/authentication" element={!user ? <AuthPage/> : <Navigate to="/"/> }/>
+			</Routes>
+		</PageLayout>
     </div>
 
   );

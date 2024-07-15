@@ -14,26 +14,22 @@ const PageLayout = ({ children }: PageLayoutProps) => {
 
   return (
     <div>
-      {canRedenderLayout && (
-        <>
-        <Header/>
-          <section className="sidebar-and-main-content">
-              <Sidebar/>
-              {children}
-          </section>
-        </>
+		{canRedenderLayout && (
+			<>
+				<Header/>
+				<section className="sidebar-and-main-content">
+					<Sidebar/>
+					{children}
+				</section>
+			</>
+		)}
 
-      )}
-      {!canRedenderLayout && (
-        <>
-          {children}
-        </>
-
-      )}
+		{!canRedenderLayout && (
+			<>
+				{children}
+			</>
+		)}
     </div>
-
-
-
   )
 }
 

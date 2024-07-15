@@ -19,3 +19,14 @@ export interface User {
     username: string;
     email: string
 }
+
+export interface UserBaseInputData {
+	email: string;
+	password: string;
+}
+
+export interface  UserSignupInputData extends UserBaseInputData {
+	username: string;
+}
+
+export interface UserLoginInputData extends UserBaseInputData {}
