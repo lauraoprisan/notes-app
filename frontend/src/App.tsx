@@ -8,7 +8,7 @@ import { useAuthContext } from './hooks/useAuthContext';
 const App : React.FC =  () => {
 
   const { user } = useAuthContext()
-  console.log("user", user)
+  // console.log("user", user)
 
   return (
     <div className="main-container">

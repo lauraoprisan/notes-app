@@ -13,7 +13,6 @@ const AuthComponent: React.FC = () => {
 		password: ''
 	  });
 
-	  console.log("formData: ", formData)
 
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setFormData((prevState) => ({
