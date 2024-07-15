@@ -5,14 +5,24 @@ import { Note, NoteInput } from '../types';
 
 // this hook manages all the CRUD operations on note, managing both DB and the react state management for notes
 const useNoteCRUD = () => {
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
     const { addNote, addNotes, updateNote, removeNote } = useNotesContext();
+
+
+    const getAuthToken = () => {
+        const user = JSON.parse(localStorage.getItem('user') || '{}');
+        return user?.token;
+    };
 
     const getNotes = async () => {
         console.log("getNotes called from hook");
         setIsLoading(true);
         try {
-            const response: AxiosResponse<Note[]> = await axios.get<Note[]>('http://localhost:4000/api/notes');
+            const token = getAuthToken();
+            const response: AxiosResponse<Note[]> = await axios.get<Note[]>('http://localhost:4000/api/notes', {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
             addNotes(response.data);
         } catch (error) {
             console.error('Failed to fetch notes:', error);
@@ -25,7 +35,11 @@ const useNoteCRUD = () => {
         console.log("postNote called from hook");
         setIsLoading(true);
         try {
-            const response: AxiosResponse<Note> = await axios.post<Note>('http://localhost:4000/api/notes', noteData);
+            const token = getAuthToken();
+            const response: AxiosResponse<Note> = await axios.post<Note>('http://localhost:4000/api/notes', noteData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
             addNote(response.data);
             return response.data._id;
         } catch (error) {
@@ -38,7 +52,11 @@ const useNoteCRUD = () => {
     const putNote = async (id: string, noteData: NoteInput) => {
         setIsLoading(true);
         try {
-            const response: AxiosResponse<Note> = await axios.put<Note>(`http://localhost:4000/api/notes/${id}`, noteData);
+            const token = getAuthToken();
+            const response: AxiosResponse<Note> = await axios.put<Note>(`http://localhost:4000/api/notes/${id}`, noteData, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
             updateNote(response.data);
         } catch (error) {
             console.error('Failed to update the note:', error);
@@ -51,7 +69,11 @@ const useNoteCRUD = () => {
         console.log("deleteNote called from hook");
         setIsLoading(true);
         try {
-            await axios.delete(`http://localhost:4000/api/notes/${id}`);
+           const token = getAuthToken();
+            await axios.delete(`http://localhost:4000/api/notes/${id}`, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+            
             removeNote(id);
         } catch (error) {
             console.error('Failed to delete the note:', error);

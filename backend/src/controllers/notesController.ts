@@ -3,7 +3,16 @@ import Note, { NoteDocument } from '../models/NoteModel.js';
 
 const getNotes = async (req: Request, res: Response) => {
     try {
-        const notes: NoteDocument[] = await Note.find({}).sort({ createdAt: -1 });
+        const userId = req.user?._id;
+        console.log("userId from getNotes before adding it: ", userId)
+
+        if (!userId) {
+            return res.status(401).json({ error: 'User not authenticated' });
+        }
+
+        const notes: NoteDocument[] = await Note.find({userId:userId}).sort({ createdAt: -1 });
+
+        console.log(notes)
         res.status(200).json(notes);
     } catch (err) {
         console.error(err);
@@ -13,12 +22,21 @@ const getNotes = async (req: Request, res: Response) => {
 
 const addNote = async (req: Request, res: Response) => {
     try {
+        const userId = req.user?._id;
+
+        console.log("userId from addNote before adding it: ", userId)
+        if (!userId) {
+            return res.status(401).json({ error: 'User not authenticated' });
+        }
+
         const { title, content } = req.body;
         const note: NoteDocument = await Note.create({
+            userId,
             title,
             content,
         });
 
+        console.log("req.user: ", req.user)
         res.status(200).json(note);
     } catch (err: any) {
         console.error(err);
@@ -28,6 +46,8 @@ const addNote = async (req: Request, res: Response) => {
 
 const updateNote = async (req: Request, res: Response) => {
     try {
+        console.log("req.user: ", req.user)
+
         const noteId = req.params.id;
         const { title, content } = req.body;
 
@@ -51,6 +71,8 @@ const updateNote = async (req: Request, res: Response) => {
 
 const deleteNote = async (req: Request, res: Response) => {
     try {
+        console.log("req.user: ", req.user)
+
         const noteId = req.params.id;
         const { title, content } = req.body;
 
