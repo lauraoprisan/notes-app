@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 
-const useClickInsideElement = (ref: React.RefObject<HTMLElement>): boolean => {
-    const [isClickInside, setIsClickInside] = useState<boolean>(false);
+const useDetectClickInsideElement = (ref: React.RefObject<HTMLElement>): boolean => {
+    const [isClickInsideElemeny, setIsClickInsideElement] = useState<boolean>(false);
 
     useEffect(() => {
+        console.log("useDetectClickInsideElement hook called")
         const handleDocumentClick = (event: MouseEvent) => {
             if (ref.current && ref.current.contains(event.target as Node)) {
-                setIsClickInside(true);
+                setIsClickInsideElement(true);
             } else {
-                setIsClickInside(false);
+                setIsClickInsideElement(false);
             }
         };
 
@@ -19,7 +20,9 @@ const useClickInsideElement = (ref: React.RefObject<HTMLElement>): boolean => {
         };
     }, [ref]);
 
-    return isClickInside;
+    return isClickInsideElemeny;
 };
 
-export default useClickInsideElement;
+export default useDetectClickInsideElement;
+
+
