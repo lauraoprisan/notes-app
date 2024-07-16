@@ -112,12 +112,12 @@ export const useAuthCRUD = () => {
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 if (error.response?.data) {
-                    setAuthError(error.response.data.error || 'Failed to signup');
+                    setAuthError(error.response.data.error || 'Authentication with Google failed');
                 } else {
-                    setAuthError('Failed to signup due to network or server error');
+                    setAuthError('Authentication with Google failed due to network or server error');
                 }
             } else {
-                  setAuthError('Failed to signup due to unexpected error');
+                  setAuthError('Authentication with Google failed due to unexpected error');
             }
             console.error(error)
         } finally {
