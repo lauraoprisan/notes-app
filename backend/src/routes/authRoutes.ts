@@ -4,11 +4,13 @@ const router: Router = express.Router();
 
 import {
     loginUser,
-    signupUser
+    signupUser,
+    googleAuth
 } from '../controllers/userController.js'
 
 
 router.post('/login', loginUser)
 router.post('/signup', signupUser)
+router.post('/google', googleAuth)
 
 export default router;
