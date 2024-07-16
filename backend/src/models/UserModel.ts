@@ -6,7 +6,7 @@ export interface UserDocument extends Document {
     email: string;
     password: string;
     username: string;
-    avatarCloudinaryId?: string;
+    profileImageURL?: string;
   }
 
 
@@ -31,7 +31,7 @@ const userSchema = new Schema<UserDocument>({
         require: [true, 'Please add an username'],
         unique:true
     },
-    avatarCloudinaryId: {
+    profileImageURL: {
         type: String,
         required:false
     },
@@ -51,7 +51,7 @@ userSchema.statics.signup = async function(
         if (!validator.isEmail(email)) {
         throw Error('Email not valid')
         }
-        
+
         const exists = await this.findOne({ email })
 
         if (exists) {

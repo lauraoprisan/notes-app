@@ -19,7 +19,9 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
 
     try {
         const JWT_SECRET = process.env.JWT_SECRET as string
+
         const { _id } = jwt.verify(token, JWT_SECRET) as MyJwtPayload;
+        
         req.user = await User.findOne({ _id }).select('_id') as UserDocument;
 
         // console.log("req.user from requireauth: ", req.user)
