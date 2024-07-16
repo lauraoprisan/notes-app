@@ -4,7 +4,7 @@ import { UserLoginInputData, UserSignupInputData } from '../types';
 
 
 const AuthComponent: React.FC = () => {
-  	const { login, signup, isLoading, authError } = useAuthCRUD();
+  	const { login, signup, authWithGoogle, isLoading, authError } = useAuthCRUD();
 	const [isLoginMode, setIsLoginMode] = useState<boolean>(true)
 	const [error, setError] = useState<string | null>(null)
 	const [formData, setFormData] = useState<UserLoginInputData | UserSignupInputData>({
@@ -33,6 +33,16 @@ const AuthComponent: React.FC = () => {
 			setError(error.message);
 		}
 	}
+
+	const handleGoogleOAuth = async () => {
+		try {
+			console.log("trying google auth")
+		  	await authWithGoogle();
+		} catch (error: any) {
+		  setError(error.message);
+		}
+	  };
+
 
 
   return (
@@ -82,6 +92,7 @@ const AuthComponent: React.FC = () => {
 				<button
 					type="submit"
 					className="simple-auth-button"
+					disabled={isLoading}
 				>
 					<span>
 						{isLoginMode ? "Log in" : "Sign Up"}
@@ -92,7 +103,7 @@ const AuthComponent: React.FC = () => {
 				<span> OR </span>
 			</div>
 			<div className="alternative-login-options">
-				<button>
+				<button onClick={handleGoogleOAuth}>
 					Continue with Google
 				</button>
 			</div>
