@@ -49,8 +49,13 @@ h1 {
     z-index:1;
 }
 
+.avatar-container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .avatar-image{
-    background-image: url("../public/user-placeholder.png");
     height:40px;
     width:40px;
     border-radius:100%;

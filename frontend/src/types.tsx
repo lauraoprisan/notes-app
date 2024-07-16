@@ -17,7 +17,8 @@ export interface Note {
 export interface User {
     _id: string | null;
     username: string;
-    email: string
+    email: string;
+    profileImageURL: string
 }
 
 export interface UserBaseInputData {
