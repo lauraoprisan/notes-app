@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import SingleNote from '../components/SingleNote';
+import SingleNote from '../components/notes/SingleNote';
 import Masonry from 'react-masonry-css'
 import CreateNoteForm from '../components/notes/CreateNoteForm';
 import { useNotesContext } from '../hooks/useNotesContext';

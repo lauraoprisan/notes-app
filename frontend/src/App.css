@@ -3,6 +3,7 @@
     --sidebar-width: 70px;
     --header-height: 50px;
     --background-color: rgb(237, 237, 237);
+    --note-option-icon-one-axis:33px; /* for height/width of note-option-icon*/
 }
 
 /* General styles*/
@@ -15,11 +16,12 @@
     font-size: 1.8rem;
     letter-spacing: 0.2px;
     line-height: 1.3;
-    background-color: var(--background-color);
+
 }
 
 html {
     font-size:62.5%;
+    background-color: var(--background-color);
 }
 
 
@@ -210,34 +212,7 @@ h1 {
 /* /Masonry grid layout*/
 
 
-/* ^Single note*/
-    .single-note{
-        /* flex-basis:25%; */
-        background-color: white;
-        height:fit-content;
-        border:1px solid black;
-    }
 
-    .grid-item {
-        background-color: #ffffff;
-        padding: 20px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        transition: box-shadow 0.3s;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: center;
-    }
-
-    .grid-item:hover {
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.565); /* Uniform shadow on all sides */
-    }
-
-
-
-
-/* /Single note*/
 
 /* ^Create note form*/
 .create-note-form{
@@ -254,7 +229,7 @@ h1 {
     padding:10px;
 }
 .create-note-description-input {
-    border: 1px solid black;
+    border:1px solid rgba(105, 105, 105, 0.719);
     border-radius: 5px;
 
 }
@@ -429,3 +404,149 @@ h1 {
 
 
 /* /Auth container*/
+
+/* ^Note*/
+
+/* ^Single note*/
+.single-note{
+    /* flex-basis:25%; */
+    background-color: white;
+    height:fit-content;
+    border:1px solid rgba(105, 105, 105, 0.719);
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    border-radius: 8px;
+    transition: box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+
+.single-note:hover {
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.32); /* Uniform shadow on all sides */
+}
+
+.single-note:hover .note-options-container{
+    opacity:1;
+}
+
+
+.single-note-main-content {
+    padding: 20px;
+    padding-bottom:0;
+
+}
+
+/* ^Note options*/
+
+.note-options-container{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    width:100%;
+    padding:10px;
+    opacity:0;
+    transition:opacity 0.2s;
+}
+
+.on-focus-note-options{
+    opacity:1;
+}
+
+
+.note-option-icon{
+    background-color: var(--background-color);
+    border:none;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:60%;
+    width:var(--note-option-icon-one-axis);
+    height:var(--note-option-icon-one-axis);
+    padding:10px;
+    border-radius: 50%;
+}
+
+.note-option-icon:hover{
+    background-color: rgb(225, 225, 225);
+}
+.more-options-icon{
+    background-image: url("../public/icons/more.png");
+}
+
+.note-options-container li{
+    position: relative;
+}
+
+.note-options-container .icon-tag {
+    position:absolute;
+    background-color: #515262f0;
+    padding:3px 7px;
+    border-radius: 5px;
+    color:white;
+    font-size: 1.4rem;
+    top: calc(var(--note-option-icon-one-axis) + 2px );
+    right:calc(var(--note-option-icon-one-axis)/2);
+    transform: translateX(50%);
+    opacity:0;
+    transition:opacity 0.3s;
+    transition-delay: 250ms;
+}
+
+
+
+.note-options-container .note-option-icon:focus + .icon-tag,
+.note-options-container .note-option-icon:active + .icon-tag {
+    display:none ;
+}
+
+
+.note-options-container li:hover .icon-tag {
+    display:block;
+    opacity:1;
+    z-index:1;
+}
+
+.note-options-container .icon-tag:hover {
+    display:none;
+}
+
+.more-options-list{
+    padding:5px 0;
+}
+.more-options-list button{
+    border:none;
+    padding:5px 10px;
+}
+
+.more-options-list button:hover{
+    background-color: rgb(225, 225, 225);
+}
+
+.more-options-list button:hover .icon-tag{
+    display:none;
+}
+
+
+/* /Note options*/
+
+
+/* /Single note*/
+
+
+/* /Note */
+
+/* ^Modal */
+
+.modal-container{
+    background-color: var(--background-color);
+    border-radius:5px;
+    box-shadow:0 0 5px rgba(0, 0, 0, 0.368);
+    top:calc(var(--note-option-icon-one-axis) + 2px );
+    left:0;
+    position: absolute;
+    /* padding:10px; */
+}
+
+/* /Modal*/
+
