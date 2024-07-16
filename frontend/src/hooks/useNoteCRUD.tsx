@@ -6,7 +6,7 @@ import { Note, NoteInput } from '../types';
 // this hook manages all the CRUD operations on note, managing both DB and the react state management for notes
 const useNoteCRUD = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const { addNote, addNotes, updateNote, removeNote } = useNotesContext();
+    const { notes, addNote, addNotes, updateNote, removeNote } = useNotesContext();
 
 
     const getAuthToken = () => {
@@ -15,7 +15,7 @@ const useNoteCRUD = () => {
     };
 
     const getNotes = async () => {
-        console.log("getNotes called from hook");
+        console.log("noteTest getNotes called from hook");
         setIsLoading(true);
         try {
             const token = getAuthToken();
@@ -24,6 +24,7 @@ const useNoteCRUD = () => {
             });
 
             addNotes(response.data);
+            console.log("noteTest notes from context from getNotes", notes)
         } catch (error) {
             console.error('Failed to fetch notes:', error);
         } finally {
@@ -73,7 +74,7 @@ const useNoteCRUD = () => {
             await axios.delete(`http://localhost:4000/api/notes/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
-            
+
             removeNote(id);
         } catch (error) {
             console.error('Failed to delete the note:', error);

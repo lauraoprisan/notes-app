@@ -14,8 +14,6 @@ import useNoteCRUD from '../hooks/useNoteCRUD';
 		console.log("user from notespage: ", user)
 		const { getNotes, isLoading } = useNoteCRUD();
 		const { notes } = useNotesContext();
-		const [notesToShow, setNotesToShow] = useState<Note[] | null>(null);
-		const [canGetLocalNotes, setCanGetLocalNotes] = useState<boolean>(false);
 
 		const breakpointColumnsObj = {
 		  default: 4,
@@ -26,35 +24,16 @@ import useNoteCRUD from '../hooks/useNoteCRUD';
 
 		// fetch notes from DB on the first render
 		useEffect(() => {
-			const getNotesFromDB = async ()=>{
+			const fetchNotes = async () => {
 				await getNotes();
-				// setNotesToShow(notes)
-			}
-			getNotesFromDB()
+			};
+			fetchNotes();
 		}, [user]);
-
-		// setting to see all notes on the first render (because then the notesToShow will be null) and setting again all notes when the note that was created / created&updated in the same time after the form has been closed; this is in order to not see realtime the new note
-
-		useEffect(() => {
-			console.log("canGetLocalNotes")
-			if (notes) {
-			  if (canGetLocalNotes) {
-				setNotesToShow(notes);
-				setCanGetLocalNotes(false);
-			  }
-			}
-		  }, [canGetLocalNotes]);
-
-		 // Fetch notes from DB whenever user changes
-
-
 
 
 	return (
 		<div className="inside-container">
-			<CreateNoteForm
-				setCanGetLocalNotes={setCanGetLocalNotes}
-			/>
+			<CreateNoteForm/>
 			{isLoading && <span>Loading</span>}
 			{!isLoading && (
 				<div className="elements-container masonry-grid">
