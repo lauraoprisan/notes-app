@@ -13,11 +13,8 @@ enum NoteStatus {
     Created,
 }
 
-interface CreateNoteFormProps {
-	setCanGetLocalNotes: React.Dispatch<React.SetStateAction<boolean>>;
-  }
 
-  const CreateNoteForm: React.FC<CreateNoteFormProps> = ({ setCanGetLocalNotes }) => {
+  const CreateNoteForm: React.FC = () => {
 	const [isFocused, setIsFocused] = useState<boolean>(false);
 	const formRef = useRef<HTMLFormElement | null>(null);
 	const {postNote, putNote, deleteNote} = useNoteCRUD();
@@ -25,6 +22,8 @@ interface CreateNoteFormProps {
 	const [noteStatus, setNoteStatus] = useState<NoteStatus>(NoteStatus.NotCreated)
 	const [clickedOutsideForm, setClickedOutsideForm] = useState<boolean>(false)
 	const [noteCreatedOrUpdated, setNoteCreatedOrUpdated] = useState<boolean>(false);
+	const [canGetLocalNotes, setCanGetLocalNotes] = useState<boolean>(false);
+
 
 
 

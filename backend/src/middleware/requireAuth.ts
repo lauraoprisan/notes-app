@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
-import User, { UserDocument } from '../models/UserModel'
+import User, { UserDocument } from '../models/UserModel.js'
 
 interface MyJwtPayload extends JwtPayload {
     _id: string;
@@ -33,4 +33,4 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
 
 }
 
-module.exports = requireAuth
+export default requireAuth
