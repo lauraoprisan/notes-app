@@ -17,7 +17,7 @@ const NoteOptions: React.FC<NoteOptionsProps> = ({note}) => {
 
     <ul ref={containerRef}  className={`note-options-container ${isClickInside ? "on-focus-note-options": ""}`}>
        <MoreOptions note={note} />
-       <MoreOptions note={note}  />
+       {/* <MoreOptions note={note}  /> */}
        {/* <EditBackgroundColor/> */}
 
 
