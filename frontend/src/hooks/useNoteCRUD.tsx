@@ -24,11 +24,14 @@ const useNoteCRUD = () => {
             });
 
             addNotes(response.data);
-            console.log("noteTest notes from context from getNotes", notes)
+
+            return response.data as Note[]; //this helps in managing get local notes behavior
+
         } catch (error) {
             console.error('Failed to fetch notes:', error);
         } finally {
             setIsLoading(false);
+
         }
     };
 

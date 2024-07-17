@@ -11,10 +11,12 @@ import useNoteCRUD from '../hooks/useNoteCRUD';
 
 	const NotesPage = () => {
 		const { user } = useAuthContext()
-		console.log("user from notespage: ", user)
 		const { getNotes, isLoading } = useNoteCRUD();
 		const { notes } = useNotesContext();
+		const [notesToShow, setNotesToShow] = useState<Note[] | null >(null)
+		const [workingOnCreateNoteForm, setWorkingOnCreateNoteForm] = useState<boolean>(false);
 
+		//this is for the masonry grid
 		const breakpointColumnsObj = {
 		  default: 4,
 		  1100: 3,
@@ -22,28 +24,38 @@ import useNoteCRUD from '../hooks/useNoteCRUD';
 		  670: 1
 		};
 
-		// fetch notes from DB on the first render
+
+		// fetch notes from DB on the first render and whenever the user changes (dependent on local storage)
+		// set notesToShow at first render to notes
 		useEffect(() => {
 			const fetchNotes = async () => {
-				await getNotes();
+				const notesFromDB = await getNotes();
+				setNotesToShow(notesFromDB ?? []);
 			};
 			fetchNotes();
 		}, [user]);
 
 
+		//do not get local notes (from context) while working on the create note form
+		useEffect(() => {
+			if (!workingOnCreateNoteForm) {
+				setNotesToShow(notes)
+			}
+		}, [notes, workingOnCreateNoteForm]);
+
 	return (
 		<div className="inside-container">
-			<CreateNoteForm/>
+			<CreateNoteForm setWorkingOnCreateNoteForm={setWorkingOnCreateNoteForm} />
 			{isLoading && <span>Loading</span>}
 			{!isLoading && (
 				<div className="elements-container masonry-grid">
-					{notes?.length === 0 && <p>You have no notes</p>}
+					{notesToShow?.length === 0 && <p>You have no notes</p>}
 					<Masonry
 					breakpointCols={breakpointColumnsObj}
 					className="my-masonry-grid"
 					columnClassName="my-masonry-grid_column"
 					>
-						{notes?.map(note => (
+						{notesToShow?.map(note => (
 							<SingleNote key={note._id} note={note}/>
 						))}
 					</Masonry>

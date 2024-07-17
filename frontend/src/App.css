@@ -553,7 +553,6 @@ input, textarea{
 
 /* /Note options*/
 
-
 /* /Single note*/
 
 
@@ -639,6 +638,8 @@ input, textarea{
 .edit-mode-note .note-options-container{
     opacity: 1;
 }
+
+
 
 /* /Edit note modal */
 

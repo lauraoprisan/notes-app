@@ -32,6 +32,7 @@ const SingleNote: React.FC<SingleNoteProps> = ({ note }) => {
 				<p>
 					{note.content}
 				</p>
+
 			</div>
 			<NoteOptions note={note}/>
 
