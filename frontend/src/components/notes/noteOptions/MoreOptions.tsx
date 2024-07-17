@@ -35,7 +35,7 @@ const MoreOptions: React.FC<MoreOptionsProps> = ({note }) => {
 
     }
   return (
-    <li ref={noteOptionListItemRef} >
+    <li ref={noteOptionListItemRef}  >
 		<button className="more-options-icon  note-option-icon" onClick={toggleModal}/>
 		{/* <div className="more-tag icon-tag">More</div> */}
 

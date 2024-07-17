@@ -37,6 +37,15 @@ h1 {
 .no-scroll{
     overflow:hidden;
 }
+
+input, textarea{
+    border:none;
+    outline:none;
+    resize: none;
+}
+
+
+
 /* /General styles*/
 
 
@@ -221,7 +230,7 @@ h1 {
 
 
 /* ^Create note form*/
-.create-note-form{
+.create-note-form, .edit-note-form{
     margin-bottom:20px;
     display:flex;
     flex-direction: column;
@@ -229,6 +238,8 @@ h1 {
     width:100%;
     max-width:600px;
 }
+
+
 
 .create-note-form input {
     background-color: transparent;
@@ -427,7 +438,7 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    position:relative;
+    /* position:relative; */
 
 }
 
@@ -523,7 +534,9 @@ h1 {
 
 .more-options-list{
     padding:5px 0;
+    z-index:5
 }
+
 .more-options-list button{
     border:none;
     padding:5px 10px;
@@ -550,7 +563,7 @@ h1 {
 
 /* ^Modal */
 
-.modal-container{
+.modal-option-container{
     background-color: var(--background-color);
     border-radius:5px;
     box-shadow:0 0 5px rgba(0, 0, 0, 0.368);
@@ -558,6 +571,14 @@ h1 {
     left:0;
     position: absolute;
     /* padding:10px; */
+}
+
+.edit-note-form{
+    gap:20px;
+}
+
+.edit-note-title-input {
+    font-weight: bold;
 }
 
 /* ^Edit note modal */
@@ -608,7 +629,36 @@ h1 {
     opacity:0;
 }
 
+.last-edit-time{
+    font-size: 1.4rem;
+    color:rgba(128, 128, 128, 0.917);
+    align-self: flex-end;
+    margin-right:20px;
+}
+
+.edit-mode-note .note-options-container{
+    opacity: 1;
+}
+
 /* /Edit note modal */
 
 /* /Modal*/
 
+
+
+/* ^media queries */
+
+@media(max-width:675px){
+
+
+    /* ^temporary style */
+    .modal-option-container{
+        right:0;
+        left:auto
+    }
+    /* /temporary style */
+
+}
+
+
+/* /media quries*/

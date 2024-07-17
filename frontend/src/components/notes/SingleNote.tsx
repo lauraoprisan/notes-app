@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { Note } from '../../types';
 import NoteOptions from './NoteOptions';
 import EditModal from '../modal/EditModal';
+import NoteEditMode from './NoteEditMode';
 
 
 // Define the Props interface
@@ -22,14 +23,6 @@ const SingleNote: React.FC<SingleNoteProps> = ({ note }) => {
         setIsEditModeOn(false);
     };
 
-	// useEffect(()=>{
-	// 	if(isEditModeOn){
-	// 		const notePosition = currentNoteRef.current?.getBoundingClientRect()
-	// 		console.log("notePosition, ", notePosition?.top)
-	// 	}
-	// }, [isEditModeOn])
-
-
   return (
 	<>
 
@@ -44,15 +37,7 @@ const SingleNote: React.FC<SingleNoteProps> = ({ note }) => {
 
 		</div>
 		<EditModal openModal={isEditModeOn} onClose={handleCloseModal}>
-				<div  className={`single-note grid-item ${isEditModeOn ? "edit-mode-note": ""}`}>
-					<div className="single-note-main-content">
-						<h2>{note.title}</h2>
-						<p>
-							{note.content}
-						</p>
-					</div>
-					<NoteOptions note={note}/>
-				</div>
+			<NoteEditMode note = {note}/>
 		</EditModal>
 
 	</>

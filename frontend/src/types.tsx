@@ -4,6 +4,12 @@ export interface NoteInput {
     content: string | null;
 }
 
+export interface NoteInputForEditOrDelete extends NoteInput {
+    id:string;
+}
+
+
+
 // Note type for the note from the database
 export interface Note {
     _id: string;
@@ -13,6 +19,9 @@ export interface Note {
     updatedAt: string;
     __v: number;
 }
+
+
+
 
 export interface User {
     _id: string | null;
