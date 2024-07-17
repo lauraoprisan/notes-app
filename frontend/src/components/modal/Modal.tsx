@@ -12,7 +12,7 @@ interface ModalProps {
     if(!openModal) return null
 
     return (
-        <div className="modal-container">
+        <div className="modal-option-container">
             {children}
         </div>
 

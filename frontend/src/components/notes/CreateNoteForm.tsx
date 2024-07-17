@@ -3,10 +3,7 @@ import { NoteInput, Note } from '../../types';
 import { useDebounce } from '../../hooks/useDebounce';
 import useNoteCRUD from '../../hooks/useNoteCRUD';
 
-interface FormData {
-  title: string | null,
-  content: string | null
-}
+
 
 enum NoteStatus {
     NotCreated,
@@ -29,7 +26,7 @@ enum NoteStatus {
 
 	console.log("CreateNoteForm rerendered")
 
-	const [formData, setFormData] = useState<FormData>({
+	const [formData, setFormData] = useState<NoteInput>({
 		title: null,
 		content: null
 	});
