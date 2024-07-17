@@ -34,13 +34,18 @@ h1 {
     font-weight:700;
 }
 
+.no-scroll{
+    overflow:hidden;
+}
 /* /General styles*/
 
 
 /* /Variables*/
 
 /* ^Header */
-    .header-container{
+
+.header-container{
+    background-color: var(--background-color);
     width:100%;
     height:var(--header-height);
     display:flex;
@@ -48,7 +53,7 @@ h1 {
     align-items: center;
     padding:0 15px;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.323);
-    z-index:1;
+    z-index: 1;
 }
 
 .avatar-container{
@@ -183,7 +188,8 @@ h1 {
     padding: 2% 7%;
     margin-left:var(--sidebar-width); /* offset to account for the sidebar width */
     margin-top:var(--header-height);
-    min-height:calc(100vh - var(--header-height))
+    min-height:calc(100vh - var(--header-height));
+    position:relative;
 }
 
 
@@ -400,6 +406,7 @@ h1 {
 
     .error{
         color:red
+
     }
 
 
@@ -420,6 +427,8 @@ h1 {
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    position:relative;
+
 }
 
 
@@ -435,7 +444,8 @@ h1 {
 .single-note-main-content {
     padding: 20px;
     padding-bottom:0;
-
+    width:100%;
+    height:100%;
 }
 
 /* ^Note options*/
@@ -536,6 +546,8 @@ h1 {
 
 /* /Note */
 
+
+
 /* ^Modal */
 
 .modal-container{
@@ -547,6 +559,56 @@ h1 {
     position: absolute;
     /* padding:10px; */
 }
+
+/* ^Edit note modal */
+
+/* #portal {
+    height:100vh;
+} */
+
+.edit-modal-container{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    width:100%;
+    height:100vh;
+}
+.edit-model-container{
+    z-index:3;
+}
+
+.edit-modal{
+    z-index:1;
+}
+
+
+.edit-mode-note{
+    position:absolute;
+    top:50%;
+    left:calc(50% + var(--sidebar-width)/2);
+    width:80%;
+    max-width:700px;
+    transform: translate(-50%, -50%);
+
+}
+
+.overlay-outside-modal{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background-color: rgba(0, 0, 0, 0.348);
+    z-index:0;
+}
+
+.hide-while-edit-mode{
+    opacity:0;
+}
+
+/* /Edit note modal */
 
 /* /Modal*/
 

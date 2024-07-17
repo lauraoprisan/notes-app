@@ -8,17 +8,19 @@ import { useAuthContext } from './hooks/useAuthContext';
 const App : React.FC =  () => {
 
   const { user } = useAuthContext()
-  // console.log("user", user)
 
   return (
-    <div className="main-container">
-		<PageLayout>
-			<Routes>
-				<Route path="/" element={user ?  <NotesPage/> : <Navigate to="/authentication"/> }/>
-				<Route path="/authentication" element={!user ? <AuthPage/> : <Navigate to="/"/> }/>
-			</Routes>
-		</PageLayout>
-    </div>
+    <>
+      <div className="main-container">
+      <PageLayout>
+        <Routes>
+          <Route path="/" element={user ?  <NotesPage/> : <Navigate to="/authentication"/> }/>
+          <Route path="/authentication" element={!user ? <AuthPage/> : <Navigate to="/"/> }/>
+        </Routes>
+      </PageLayout>
+      </div>
+    </>
+
 
   );
 }
