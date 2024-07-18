@@ -420,6 +420,21 @@ input, textarea{
 
     }
 
+    .alternative-login-options button {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        gap:10px;
+    }
+
+    .auth-button-icon{
+        background-image: url('../public/icons/google.png');
+        width:20px;
+        height:20px;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
 
 /* /Auth container*/
 
@@ -491,8 +506,13 @@ input, textarea{
 .note-option-icon:hover{
     background-color: rgb(225, 225, 225);
 }
+
 .more-options-icon{
     background-image: url("../public/icons/more.png");
+    background-size:55%;
+}
+.background-color-menu-icon{
+    background-image: url("../public/icons/pallete.png");
 }
 
 .note-options-container li{
@@ -550,6 +570,89 @@ input, textarea{
     display:none;
 }
 
+.color-options-list{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    padding:10px;
+}
+
+.color-options-list li{
+    width:35px;
+    height:35px;
+    min-width:35px;
+    min-height:35px;
+    border-radius: 50%;
+    position:relative;
+}
+
+.color-options-list li:hover{
+    border:2px solid black;
+}
+
+.color-options-list li.selected-color::after {
+    position:absolute;
+    content:url('../public/icons/check-mark.png');
+    display: inline-block;
+    width:20px;
+    height:20px;
+    top:-5px;
+    right:-10px;
+    background-color: var(--background-color);
+    border-radius: 50%;
+
+}
+
+.orange{
+    background-color: #efb45458;
+}
+
+.red{
+    background-color: #ef303058;
+}
+
+.pink{
+    background-color: #f9a1ec58;
+}
+
+.blue{
+    background-color: #6bbbdd58;
+}
+
+.green{
+    background-color: #8dcfa458;
+}
+
+.brown{
+    background-color: #886e3d58;
+}
+
+.grey{
+    background-color: #a4a4a458;
+}
+
+.yellow{
+    background-color: #eee87290;
+}
+.purple{
+    background-color: #b68ab190;
+}
+
+.no-color{
+    background-image: url('../public/icons/no-color.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    border:1px solid #ababab89;
+}
+
+.selected-color {
+    border: 2px solid rgba(0, 0, 0, 0.722);
+}
+
+
 
 /* /Note options*/
 
@@ -569,7 +672,9 @@ input, textarea{
     top:calc(var(--note-option-icon-one-axis) + 2px );
     left:0;
     position: absolute;
+
     /* padding:10px; */
+
 }
 
 .edit-note-form{
@@ -655,10 +760,18 @@ input, textarea{
     /* ^temporary style */
     .modal-option-container{
         right:0;
-        left:auto
+        left:unset;
     }
     /* /temporary style */
 
+}
+
+@media(max-width:855px){
+    .color-options-list{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
 }
 
 

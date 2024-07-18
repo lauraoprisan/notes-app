@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import NoteOptions from './NoteOptions'
+import NoteOptions from './noteOptions/NoteOptions'
 import { Note, NoteInput, NoteInputForEditOrDelete } from '../../types'
 import useNoteCRUD from '../../hooks/useNoteCRUD'
 import { useDebounce } from '../../hooks/useDebounce'

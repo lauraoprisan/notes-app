@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Note } from '../../types';
-import MoreOptions from './noteOptions/MoreOptions';
-import useDetectClickInsideElement from '../../hooks/useDetectClickInsideElement';
+import { Note } from '../../../types';
+import MoreOptions from './MoreOptions';
+import useDetectClickInsideElement from '../../../hooks/useDetectClickInsideElement';
+import BackGroundColorOptions from './BackGroundColorOptions';
 
 interface NoteOptionsProps {
     note: Note;
@@ -16,6 +17,7 @@ const NoteOptions: React.FC<NoteOptionsProps> = ({note}) => {
   return (
 
     <ul ref={containerRef}  className={`note-options-container ${isClickInside ? "on-focus-note-options": ""}`}>
+       <BackGroundColorOptions note={note}/>
        <MoreOptions note={note} />
        {/* <MoreOptions note={note}  /> */}
        {/* <EditBackgroundColor/> */}

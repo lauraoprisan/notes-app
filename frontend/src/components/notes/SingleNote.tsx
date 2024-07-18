@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Note } from '../../types';
-import NoteOptions from './NoteOptions';
+import NoteOptions from './noteOptions/NoteOptions';
 import EditModal from '../modal/EditModal';
 import NoteEditMode from './NoteEditMode';
 
