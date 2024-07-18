@@ -47,7 +47,7 @@ const NoteEditMode: React.FC<NoteEditModeProps>= ({note}) => {
 
 
   return (
-    <div  className="single-note edit-mode-note">
+    <div  className={`single-note edit-mode-note ${note.backgroundColor ? note.backgroundColor : ''}`}>
         <form className="single-note-main-content edit-note-form ">
             <input
                 type="text"

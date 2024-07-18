@@ -36,7 +36,7 @@ const useNoteCRUD = () => {
     };
 
     const postNote = async (noteData: NoteInput) => {
-        console.log("postNote called from hook");
+        console.log("jst postNote called from hook");
         setIsLoading(true);
         try {
             const token = getAuthToken();
@@ -54,6 +54,7 @@ const useNoteCRUD = () => {
     };
 
     const putNote = async (id: string, noteData: NoteInput) => {
+        console.log("jst putNote called")
         setIsLoading(true);
         try {
             const token = getAuthToken();

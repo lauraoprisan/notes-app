@@ -30,7 +30,8 @@ interface CreateNoteFormProps {
 
 	const [formData, setFormData] = useState<NoteInput>({
 		title: null,
-		content: null
+		content: null,
+		backgroundColor:null
 	});
 
 	const debouncedFormData = useDebounce(formData);
@@ -39,6 +40,7 @@ interface CreateNoteFormProps {
         const currentNote: NoteInput = {
             title: debouncedFormData.title,
             content: debouncedFormData.content,
+			backgroundColor: debouncedFormData.backgroundColor
         };
 
         const handleNotes = async () => {
@@ -46,13 +48,13 @@ interface CreateNoteFormProps {
                 const noteIdFromDB = await postNote(currentNote);
                 setCurrentNoteId(noteIdFromDB);
                 setNoteStatus(NoteStatus.Created);
-            } else if (noteStatus === NoteStatus.Created && (debouncedFormData.title || debouncedFormData.content)) {
+            } else if (noteStatus === NoteStatus.Created && (debouncedFormData.title || debouncedFormData.content || debouncedFormData.backgroundColor)) {
                 if (currentNoteId) {
                 	await putNote(currentNoteId, currentNote);
                 } else {
 					console.log("Error: something went wrong. There is no id")
 				}
-            } else if (noteStatus === NoteStatus.Created && !debouncedFormData.title && !debouncedFormData.content) {
+            } else if (noteStatus === NoteStatus.Created && !debouncedFormData.title && !debouncedFormData.content ) {
                 if (currentNoteId) {
                     await deleteNote(currentNoteId);
                     setNoteStatus(NoteStatus.NotCreated); //reset the noteStatus for an upcoming one

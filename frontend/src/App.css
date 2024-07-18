@@ -42,6 +42,7 @@ input, textarea{
     border:none;
     outline:none;
     resize: none;
+    background-color: transparent;
 }
 
 
@@ -220,10 +221,8 @@ input, textarea{
 }
 
 .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
-    background: var(--background-color);
     margin-bottom: 20px;
 }
-
 /* /Masonry grid layout*/
 
 
@@ -443,7 +442,7 @@ input, textarea{
 /* ^Single note*/
 .single-note{
     /* flex-basis:25%; */
-    background-color: white;
+    background-color: var(--background-color);
     height:fit-content;
     border:1px solid rgba(105, 105, 105, 0.719);
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
@@ -472,6 +471,7 @@ input, textarea{
     padding-bottom:0;
     width:100%;
     height:100%;
+    background-color: transparent;
 }
 
 /* ^Note options*/
@@ -492,7 +492,7 @@ input, textarea{
 
 
 .note-option-icon{
-    background-color: var(--background-color);
+    background-color: transparent;
     border:none;
     background-repeat: no-repeat;
     background-position: center;
@@ -504,7 +504,7 @@ input, textarea{
 }
 
 .note-option-icon:hover{
-    background-color: rgb(225, 225, 225);
+    background-color: rgba(0, 0, 0, 0.059);
 }
 
 .more-options-icon{
@@ -609,16 +609,19 @@ input, textarea{
     background-color: #efb45458;
 }
 
+/* .none {
+    background-color: var(--background-color);
+} */
 .red{
-    background-color: #ef303058;
+    background-color: #d5636358;
 }
 
 .pink{
-    background-color: #f9a1ec58;
+    background-color: #f9a1ec55;
 }
 
 .blue{
-    background-color: #6bbbdd58;
+    background-color: #6bbbddac;
 }
 
 .green{
@@ -672,6 +675,7 @@ input, textarea{
     top:calc(var(--note-option-icon-one-axis) + 2px );
     left:0;
     position: absolute;
+    z-index:5;
 
     /* padding:10px; */
 
@@ -691,6 +695,7 @@ input, textarea{
     height:100vh;
 } */
 
+
 .edit-modal-container{
     position:fixed;
     top:0;
@@ -699,25 +704,34 @@ input, textarea{
     bottom:0;
     width:100%;
     height:100vh;
+    display:flex;
 }
-.edit-model-container{
+
+.edit-modal-container{
     z-index:3;
 }
+
 
 .edit-modal{
     z-index:1;
 }
 
-
-.edit-mode-note{
+.edit-modal-inner-content{
     position:absolute;
     top:50%;
     left:calc(50% + var(--sidebar-width)/2);
     width:80%;
     max-width:700px;
     transform: translate(-50%, -50%);
-
+    z-index:10;
+    background-color: rgb(255, 255, 255);
+    border-radius:8px;
 }
+
+.clear-canvas-bg{
+    background-color: rgb(255, 255, 255);
+}
+
 
 .overlay-outside-modal{
     position:fixed;
@@ -725,13 +739,16 @@ input, textarea{
     right:0;
     left:0;
     bottom:0;
-    background-color: rgba(0, 0, 0, 0.348);
+    background-color: rgba(0, 0, 0, 0.153);
     z-index:0;
 }
+
+
 
 .hide-while-edit-mode{
     opacity:0;
 }
+
 
 .last-edit-time{
     font-size: 1.4rem;
@@ -740,6 +757,9 @@ input, textarea{
     margin-right:20px;
 }
 
+.edit-mode-note{
+    border:none;
+}
 .edit-mode-note .note-options-container{
     opacity: 1;
 }
@@ -776,3 +796,4 @@ input, textarea{
 
 
 /* /media quries*/
+

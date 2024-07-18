@@ -4,11 +4,12 @@ export interface NoteDocument extends Document {
     userId: string
     title?: string;
     content?: string;
+    backgroundColor?: string;
 }
 
 const noteSchema = new Schema<NoteDocument>({
     userId: {
-        type:String,
+        type: String,
         required:true
     },
     title: {
@@ -19,6 +20,10 @@ const noteSchema = new Schema<NoteDocument>({
         type: String,
         required: false
     },
+    backgroundColor: {
+        type: String,
+        required:false
+    }
 }, { timestamps: true });
 
 const Note = model<NoteDocument>('Note', noteSchema);
