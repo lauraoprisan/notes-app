@@ -13,9 +13,13 @@ interface AvatarProps {
 const Avatar: React.FC<AvatarProps> = ({ size = AvatarSize.small }) => {
   const { user } = useAuthContext();
 
+
+  console.log("user?.profileImageURL: ", user?.profileImageURL)
   return (
     <div className="avatar-container">
-        <img className={`avatar-image ${size === AvatarSize.large ? 'large' : 'small'}`} src={user?.profileImageURL || userProfilePlaceholder}/>
+        <img className={`avatar-image ${size === AvatarSize.large ? 'large' : 'small'}`} src={user?.profileImageURL || userProfilePlaceholder}
+          referrerPolicy="no-referrer"
+        />
     </div>
   )
 }

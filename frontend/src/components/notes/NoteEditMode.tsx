@@ -4,6 +4,7 @@ import { Note, NoteInput, NoteInputForEditOrDelete } from '../../types'
 import useNoteCRUD from '../../hooks/useNoteCRUD'
 import { useDebounce } from '../../hooks/useDebounce'
 import { formatDate } from '../../utils/timeAgo'
+import { autoGrowTextarea } from '../../utils/manageTextareaDimensions'
 
 interface NoteEditModeProps {
     note: Note
@@ -22,6 +23,7 @@ const NoteEditMode: React.FC<NoteEditModeProps>= ({note}) => {
 
     const [formData, setFormData] = useState<NoteInput>(initialFormData.current);
     const debouncedFormData = useDebounce(formData);
+    const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     useEffect(() => {
         const handleEditNote = async () => {
@@ -43,12 +45,27 @@ const NoteEditMode: React.FC<NoteEditModeProps>= ({note}) => {
             ...prevData,
             [name]: value,
         }));
+
+        if (e.target instanceof HTMLTextAreaElement) {
+            autoGrowTextarea(e.target);
+        }
     };
+
+    //to set the height of the textarea at first render
+    useEffect(()=>{
+        if(textareaRef.current){
+            autoGrowTextarea(textareaRef.current)
+        }
+    },[])
+
+    const handleDefaultBehavior = (e: React.FormEvent) => {
+        e.preventDefault()
+    }
 
 
   return (
     <div  className={`single-note edit-mode-note ${note.backgroundColor ? note.backgroundColor : ''}`}>
-        <form className="single-note-main-content edit-note-form ">
+        <form className="single-note-main-content edit-note-form " onSubmit={handleDefaultBehavior}>
             <input
                 type="text"
                 className="edit-note-title-input"
@@ -58,6 +75,7 @@ const NoteEditMode: React.FC<NoteEditModeProps>= ({note}) => {
                 onChange={handleInputChange}
             />
             <textarea
+                ref={textareaRef}
                 name="content"
                 value={formData.content as string}
             	onChange={handleInputChange}

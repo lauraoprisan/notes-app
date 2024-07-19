@@ -9,6 +9,7 @@ const App : React.FC =  () => {
 
   const { user } = useAuthContext()
 
+  console.log(user)
   return (
     <>
       <div className="main-container">

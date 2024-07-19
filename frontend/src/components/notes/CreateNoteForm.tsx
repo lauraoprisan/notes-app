@@ -5,6 +5,7 @@ import useNoteCRUD from '../../hooks/useNoteCRUD';
 import useDetectClickInsideElement from '../../hooks/useDetectClickInsideElement';
 import NoteOptions from './noteOptions/NoteOptions';
 import { ColorOption } from './noteOptions/BackGroundColorOptions';
+import { autoGrowTextarea } from '../../utils/manageTextareaDimensions';
 
 
 
@@ -26,6 +27,7 @@ interface CreateNoteFormProps {
 	const [noteStatus, setNoteStatus] = useState<NoteStatus>(NoteStatus.NotCreated)
 	const [temporaryBackgroundColor, setTemporaryBackgroundColor] = useState<ColorOption>(ColorOption.None)
 	const [isNoteDeletedFromOptions, setIsNoteDeletedFromOptions] = useState<boolean>(false)
+	const textareaRef = useRef<HTMLTextAreaElement>(null)
 
 
     const isClickInside = useDetectClickInsideElement(formSectionRef);
@@ -93,6 +95,9 @@ interface CreateNoteFormProps {
 			setWorkingOnCreateNoteForm(false)
 			setTemporaryBackgroundColor(ColorOption.None)
 			setIsNoteDeletedFromOptions(false)
+			if (textareaRef.current) {
+                textareaRef.current.style.height = 'auto';
+            }
 		}
 
 	}, [isClickInside, isNoteDeletedFromOptions])
@@ -104,11 +109,19 @@ interface CreateNoteFormProps {
 		...prevData,
 		[name]: value,
 		}));
+
+		if (e.target instanceof HTMLTextAreaElement) {
+            autoGrowTextarea(e.target);
+        }
 	};
+
+	const handleDefaultBehavior = (e: React.FormEvent) => {
+        e.preventDefault()
+    }
 
 	return (
 		<div className={`create-note-section ${temporaryBackgroundColor} ${isFocused ? 'focused' : ''}`} ref={formSectionRef}>
-			<form className="create-note-form">
+			<form className="create-note-form" onSubmit={handleDefaultBehavior}>
 			{isFocused && (
 				<input
 				type="text"
@@ -119,16 +132,8 @@ interface CreateNoteFormProps {
 				onChange={handleInputChange}
 				/>
 				)}
-				{/* <input
-					type="text"
-					className="create-note-description-input"
-					placeholder="Create a note..."
-					name="content"
-					value={formData.content ?? ''}
-					onFocus={handleShowFullForm}
-					onChange={handleInputChange}
-				/> */}
 				<textarea
+					ref={textareaRef}
 					className="create-note-description-textarea"
 					name="content"
 					placeholder="Create a note..."
