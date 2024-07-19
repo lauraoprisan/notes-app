@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import NoteOptions from './NoteOptions'
+import NoteOptions from './noteOptions/NoteOptions'
 import { Note, NoteInput, NoteInputForEditOrDelete } from '../../types'
 import useNoteCRUD from '../../hooks/useNoteCRUD'
 import { useDebounce } from '../../hooks/useDebounce'
@@ -47,7 +47,7 @@ const NoteEditMode: React.FC<NoteEditModeProps>= ({note}) => {
 
 
   return (
-    <div  className="single-note edit-mode-note">
+    <div  className={`single-note edit-mode-note ${note.backgroundColor ? note.backgroundColor : ''}`}>
         <form className="single-note-main-content edit-note-form ">
             <input
                 type="text"

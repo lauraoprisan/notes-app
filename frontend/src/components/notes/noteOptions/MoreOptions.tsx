@@ -6,13 +6,16 @@ import useDetectClickInsideElement from '../../../hooks/useDetectClickInsideElem
 
 interface MoreOptionsProps {
     note: Note;
+    setIsNoteDeletedFromOptions?:React.Dispatch<React.SetStateAction<boolean>>;
+
 }
 
-const MoreOptions: React.FC<MoreOptionsProps> = ({note }) => {
+const MoreOptions: React.FC<MoreOptionsProps> = ({note, setIsNoteDeletedFromOptions }) => {
 	const [openModal, setOpenModal] = useState<boolean>(false)
 	const {deleteNote} = useNoteCRUD();
 	const noteOptionListItemRef = useRef<HTMLLIElement>(null);
 	const isClickInside = useDetectClickInsideElement(noteOptionListItemRef);
+
 
 
 	useEffect(()=>{
@@ -29,6 +32,9 @@ const MoreOptions: React.FC<MoreOptionsProps> = ({note }) => {
 	const handleDeleteNote = async() => {
         try {
             await deleteNote(note._id)
+			if(setIsNoteDeletedFromOptions){
+				setIsNoteDeletedFromOptions(true)
+			}
         } catch (error) {
             console.error(error)
         }

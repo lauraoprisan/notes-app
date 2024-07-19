@@ -23,6 +23,7 @@ export const NotesProvider: React.FC<NotesProviderProps> = ({ children }) => {
          return notes
     }
 
+
     const addNotes =  (notesFromDatabase: Note[] | null) => {
         setNotes(notesFromDatabase)
     }

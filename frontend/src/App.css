@@ -3,6 +3,7 @@
     --sidebar-width: 70px;
     --header-height: 50px;
     --background-color: rgb(237, 237, 237);
+    --second-font-color:rgb(65, 65, 65);
     --note-option-icon-one-axis:33px; /* for height/width of note-option-icon*/
 }
 
@@ -42,6 +43,12 @@ input, textarea{
     border:none;
     outline:none;
     resize: none;
+    background-color: transparent;
+}
+
+
+::placeholder{
+    color:var(--second-font-color) !important;
 }
 
 
@@ -220,17 +227,15 @@ input, textarea{
 }
 
 .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
-    background: var(--background-color);
     margin-bottom: 20px;
 }
-
 /* /Masonry grid layout*/
 
 
 
 
 /* ^Create note form*/
-.create-note-form, .edit-note-form{
+.create-note-section, .edit-note-form{
     margin-bottom:20px;
     display:flex;
     flex-direction: column;
@@ -239,13 +244,20 @@ input, textarea{
     max-width:600px;
 }
 
+.create-note-form{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:100%;
+}
 
 
-.create-note-form input {
+
+.create-note-section input, .create-note-section textarea {
     background-color: transparent;
     padding:10px;
 }
-.create-note-description-input {
+.create-note-description-textarea {
     border:1px solid rgba(105, 105, 105, 0.719);
     border-radius: 5px;
 
@@ -257,15 +269,20 @@ input, textarea{
 }
 
 
-.create-note-form.focused input {
+.create-note-section.focused textarea {
     outline: none;
-    border:none
+    border:none;
+    padding-bottom:0;
 }
 
-.create-note-form.focused {
+.create-note-section.focused {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.432);
     border-radius:5px;
     padding:10px 0;
+}
+
+.create-note-section .note-options-container{
+    opacity:1;
 }
 
 
@@ -420,6 +437,21 @@ input, textarea{
 
     }
 
+    .alternative-login-options button {
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        gap:10px;
+    }
+
+    .auth-button-icon{
+        background-image: url('../public/icons/google.png');
+        width:20px;
+        height:20px;
+        background-repeat: no-repeat;
+        background-size: contain;
+    }
+
 
 /* /Auth container*/
 
@@ -428,7 +460,7 @@ input, textarea{
 /* ^Single note*/
 .single-note{
     /* flex-basis:25%; */
-    background-color: white;
+    background-color: var(--background-color);
     height:fit-content;
     border:1px solid rgba(105, 105, 105, 0.719);
     /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
@@ -457,6 +489,7 @@ input, textarea{
     padding-bottom:0;
     width:100%;
     height:100%;
+    background-color: transparent;
 }
 
 /* ^Note options*/
@@ -477,7 +510,7 @@ input, textarea{
 
 
 .note-option-icon{
-    background-color: var(--background-color);
+    background-color: transparent;
     border:none;
     background-repeat: no-repeat;
     background-position: center;
@@ -489,10 +522,15 @@ input, textarea{
 }
 
 .note-option-icon:hover{
-    background-color: rgb(225, 225, 225);
+    background-color: rgba(0, 0, 0, 0.059);
 }
+
 .more-options-icon{
     background-image: url("../public/icons/more.png");
+    background-size:55%;
+}
+.background-color-menu-icon{
+    background-image: url("../public/icons/pallete.png");
 }
 
 .note-options-container li{
@@ -550,6 +588,89 @@ input, textarea{
     display:none;
 }
 
+.color-options-list{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    padding:10px;
+}
+
+.color-options-list li{
+    width:35px;
+    height:35px;
+    min-width:35px;
+    min-height:35px;
+    border-radius: 50%;
+    position:relative;
+}
+
+.color-options-list li:hover{
+    border:2px solid black;
+}
+
+.color-options-list li.selected-color::after {
+    position:absolute;
+    content:url('../public/icons/check-mark.png');
+    display: inline-block;
+    width:20px;
+    height:20px;
+    top:-5px;
+    right:-10px;
+    background-color: var(--background-color);
+    border-radius: 50%;
+
+}
+
+.orange{
+    background-color: #f8d37c;
+}
+
+.red{
+    background-color: #f7a2a2;
+}
+
+.pink{
+    background-color: #fccef5;
+}
+
+.blue{
+    background-color: #91d4f0;
+}
+
+.green{
+    background-color: #abe5bf;
+}
+
+.brown{
+    background-color: #dec38a;
+}
+
+.grey{
+    background-color: #d1d1d1;
+}
+
+.yellow{
+    background-color: #f6f192;
+}
+.purple{
+    background-color: #dfb9ed;
+}
+
+.no-color{
+    background-image: url('../public/icons/no-color.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 50%;
+    border:1px solid #ababab89;
+}
+
+.selected-color {
+    border: 2px solid rgba(0, 0, 0, 0.722);
+}
+
+
 
 /* /Note options*/
 
@@ -569,7 +690,10 @@ input, textarea{
     top:calc(var(--note-option-icon-one-axis) + 2px );
     left:0;
     position: absolute;
+    z-index:5;
+
     /* padding:10px; */
+
 }
 
 .edit-note-form{
@@ -586,6 +710,7 @@ input, textarea{
     height:100vh;
 } */
 
+
 .edit-modal-container{
     position:fixed;
     top:0;
@@ -594,25 +719,19 @@ input, textarea{
     bottom:0;
     width:100%;
     height:100vh;
+    display:flex;
 }
-.edit-model-container{
+
+.edit-modal-container{
     z-index:3;
 }
+
 
 .edit-modal{
     z-index:1;
 }
 
 
-.edit-mode-note{
-    position:absolute;
-    top:50%;
-    left:calc(50% + var(--sidebar-width)/2);
-    width:80%;
-    max-width:700px;
-    transform: translate(-50%, -50%);
-
-}
 
 .overlay-outside-modal{
     position:fixed;
@@ -620,21 +739,38 @@ input, textarea{
     right:0;
     left:0;
     bottom:0;
-    background-color: rgba(0, 0, 0, 0.348);
+    background-color: rgba(0, 0, 0, 0.383);
     z-index:0;
 }
+
+.edit-modal-content {
+    position:absolute;
+    top:50%;
+    left:calc(50% + var(--sidebar-width)/2);
+    width:80%;
+    max-width:700px;
+    transform: translate(-50%, -50%);
+    z-index:10;
+    background-color: rgb(255, 255, 255);
+    border-radius:8px;
+}
+
 
 .hide-while-edit-mode{
     opacity:0;
 }
 
+
 .last-edit-time{
     font-size: 1.4rem;
-    color:rgba(128, 128, 128, 0.917);
+    color:var(--second-font-color);
     align-self: flex-end;
     margin-right:20px;
 }
 
+.edit-mode-note{
+    border:none;
+}
 .edit-mode-note .note-options-container{
     opacity: 1;
 }
@@ -655,11 +791,20 @@ input, textarea{
     /* ^temporary style */
     .modal-option-container{
         right:0;
-        left:auto
+        left:unset;
     }
     /* /temporary style */
 
 }
 
+@media(max-width:855px){
+    .color-options-list{
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 10px;
+    }
+}
+
 
 /* /media quries*/
+

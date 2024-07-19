@@ -104,6 +104,7 @@ const AuthComponent: React.FC = () => {
 			</div>
 			<div className="alternative-login-options">
 				<button onClick={handleGoogleOAuth}>
+					<div className="auth-button-icon"></div>
 					Continue with Google
 				</button>
 			</div>

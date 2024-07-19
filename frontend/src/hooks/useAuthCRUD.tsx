@@ -18,14 +18,12 @@ export const useAuthCRUD = () => {
 		const {email, password} = formData
 
 		try {
-			console.log("trying login")
 			const response: AxiosResponse<User> = await axios.post(`http://localhost:4000/api/auth/login`, {
 				email,
 				password,
 			});
 
 			const { data } = response;
-			console.log("reponse from auth: ", data)
 
 			// save the user to local storage
 			localStorage.setItem('user', JSON.stringify(data));
@@ -82,18 +80,14 @@ export const useAuthCRUD = () => {
 	};
 
 	const authWithGoogle = async () => {
-        console.log("useGoogleAuth here")
 
         const auth = getAuth(app);
         const provider = new GoogleAuthProvider();
         provider.setCustomParameters({ prompt: 'select_account' });
-        console.log("useGoogleAuth here 2")
 
         try {
-            console.log("useGoogleAuth here: try")
 
             const resultsFromGoogle = await signInWithPopup(auth, provider);
-            console.log("resultFromGoogle", resultsFromGoogle);
 
             const response: AxiosResponse<User>  = await axios.post(`http://localhost:4000/api/auth/google`, {
                 email: resultsFromGoogle.user.email,

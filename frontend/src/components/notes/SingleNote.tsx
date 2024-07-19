@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Note } from '../../types';
-import NoteOptions from './NoteOptions';
+import NoteOptions from './noteOptions/NoteOptions';
 import EditModal from '../modal/EditModal';
 import NoteEditMode from './NoteEditMode';
 
@@ -25,8 +25,7 @@ const SingleNote: React.FC<SingleNoteProps> = ({ note }) => {
 
   return (
 	<>
-
-		<div className={`single-note grid-item ${isEditModeOn ? " hide-while-edit-mode": ""}`} ref={currentNoteRef} >
+		<div className={`single-note grid-item ${note.backgroundColor ? note.backgroundColor : ''} ${isEditModeOn ? 'hide-while-edit-mode' : ''}`} ref={currentNoteRef}>
 			<div className="single-note-main-content" onClick={handleEnableEditMode}>
 				<h2>{note.title}</h2>
 				<p>
@@ -37,6 +36,7 @@ const SingleNote: React.FC<SingleNoteProps> = ({ note }) => {
 			<NoteOptions note={note}/>
 
 		</div>
+
 		<EditModal openModal={isEditModeOn} onClose={handleCloseModal}>
 			<NoteEditMode note = {note}/>
 		</EditModal>
