@@ -15,7 +15,6 @@ const useNoteCRUD = () => {
     };
 
     const getNotes = async () => {
-        console.log("noteTest getNotes called from hook");
         setIsLoading(true);
         try {
             const token = getAuthToken();
@@ -36,7 +35,6 @@ const useNoteCRUD = () => {
     };
 
     const postNote = async (noteData: NoteInput) => {
-        console.log("jst postNote called from hook");
         setIsLoading(true);
         try {
             const token = getAuthToken();
@@ -45,7 +43,7 @@ const useNoteCRUD = () => {
             });
 
             addNote(response.data);
-            return response.data._id;
+            return response.data;
         } catch (error) {
             console.error('Failed to post the note:', error);
         } finally {
@@ -54,7 +52,6 @@ const useNoteCRUD = () => {
     };
 
     const putNote = async (id: string, noteData: NoteInput) => {
-        console.log("jst putNote called")
         setIsLoading(true);
         try {
             const token = getAuthToken();
@@ -71,7 +68,6 @@ const useNoteCRUD = () => {
     };
 
     const deleteNote = async (id: string) => {
-        console.log("deleteNote called from hook");
         setIsLoading(true);
         try {
            const token = getAuthToken();

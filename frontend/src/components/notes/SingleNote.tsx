@@ -23,7 +23,6 @@ const SingleNote: React.FC<SingleNoteProps> = ({ note }) => {
         setIsEditModeOn(false);
     };
 
-	console.log("note from single note jat", note)
   return (
 	<>
 		<div className={`single-note grid-item ${note.backgroundColor ? note.backgroundColor : ''} ${isEditModeOn ? 'hide-while-edit-mode' : ''}`} ref={currentNoteRef}>
@@ -37,7 +36,7 @@ const SingleNote: React.FC<SingleNoteProps> = ({ note }) => {
 			<NoteOptions note={note}/>
 
 		</div>
-		
+
 		<EditModal openModal={isEditModeOn} onClose={handleCloseModal}>
 			<NoteEditMode note = {note}/>
 		</EditModal>

@@ -18,7 +18,6 @@ interface ModalProps {
 
 
 			if (rect.right > (window.innerWidth - 5)) {
-				console.log("lp1 outOfBound")
 				const overflow = rect.right - window.innerWidth;
 				modalOptionRef.current.style.right = `0`;
 				modalOptionRef.current.style.left = `auto`;

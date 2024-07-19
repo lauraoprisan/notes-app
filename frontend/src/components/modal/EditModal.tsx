@@ -41,11 +41,10 @@ const EditModal: React.FC<ModalProps> = ({openModal, children, onClose}) => {
         <section className="edit-modal-container">
             <div className="overlay-outside-modal" ref={editModalRef}>
             </div>
-            <div className="edit-modal-inner-content clear-canvas-bg">
-                <div className="edit-modal-content" >
-                    {children}
-                </div>
+            <div className="edit-modal-content " >
+                {children}
             </div>
+
 
         </section>,
         document.getElementById('portal') as HTMLElement

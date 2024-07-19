@@ -43,7 +43,7 @@ const addNote = async (req: Request, res: Response) => {
 
 const updateNote = async (req: Request, res: Response) => {
     try {
-        console.log("updateNote called")
+        // console.log("updateNote called")
         const noteId = req.params.id;
         const { title, content, backgroundColor } = req.body;
 
@@ -68,6 +68,7 @@ const updateNote = async (req: Request, res: Response) => {
 const deleteNote = async (req: Request, res: Response) => {
     try {
 
+        // console.log("deleteNote controller called")
         const noteId = req.params.id;
 
         const note: NoteDocument | null = await Note.findByIdAndDelete(

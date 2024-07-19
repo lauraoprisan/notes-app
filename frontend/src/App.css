@@ -3,6 +3,7 @@
     --sidebar-width: 70px;
     --header-height: 50px;
     --background-color: rgb(237, 237, 237);
+    --second-font-color:rgb(65, 65, 65);
     --note-option-icon-one-axis:33px; /* for height/width of note-option-icon*/
 }
 
@@ -43,6 +44,11 @@ input, textarea{
     outline:none;
     resize: none;
     background-color: transparent;
+}
+
+
+::placeholder{
+    color:var(--second-font-color) !important;
 }
 
 
@@ -229,7 +235,7 @@ input, textarea{
 
 
 /* ^Create note form*/
-.create-note-form, .edit-note-form{
+.create-note-section, .edit-note-form{
     margin-bottom:20px;
     display:flex;
     flex-direction: column;
@@ -238,13 +244,20 @@ input, textarea{
     max-width:600px;
 }
 
+.create-note-form{
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:100%;
+}
 
 
-.create-note-form input {
+
+.create-note-section input, .create-note-section textarea {
     background-color: transparent;
     padding:10px;
 }
-.create-note-description-input {
+.create-note-description-textarea {
     border:1px solid rgba(105, 105, 105, 0.719);
     border-radius: 5px;
 
@@ -256,15 +269,20 @@ input, textarea{
 }
 
 
-.create-note-form.focused input {
+.create-note-section.focused textarea {
     outline: none;
-    border:none
+    border:none;
+    padding-bottom:0;
 }
 
-.create-note-form.focused {
+.create-note-section.focused {
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.432);
     border-radius:5px;
     padding:10px 0;
+}
+
+.create-note-section .note-options-container{
+    opacity:1;
 }
 
 
@@ -606,41 +624,38 @@ input, textarea{
 }
 
 .orange{
-    background-color: #efb45458;
+    background-color: #f8d37c;
 }
 
-/* .none {
-    background-color: var(--background-color);
-} */
 .red{
-    background-color: #d5636358;
+    background-color: #f7a2a2;
 }
 
 .pink{
-    background-color: #f9a1ec55;
+    background-color: #fccef5;
 }
 
 .blue{
-    background-color: #6bbbddac;
+    background-color: #91d4f0;
 }
 
 .green{
-    background-color: #8dcfa458;
+    background-color: #abe5bf;
 }
 
 .brown{
-    background-color: #886e3d58;
+    background-color: #dec38a;
 }
 
 .grey{
-    background-color: #a4a4a458;
+    background-color: #d1d1d1;
 }
 
 .yellow{
-    background-color: #eee87290;
+    background-color: #f6f192;
 }
 .purple{
-    background-color: #b68ab190;
+    background-color: #dfb9ed;
 }
 
 .no-color{
@@ -716,7 +731,19 @@ input, textarea{
     z-index:1;
 }
 
-.edit-modal-inner-content{
+
+
+.overlay-outside-modal{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
+    background-color: rgba(0, 0, 0, 0.383);
+    z-index:0;
+}
+
+.edit-modal-content {
     position:absolute;
     top:50%;
     left:calc(50% + var(--sidebar-width)/2);
@@ -728,22 +755,6 @@ input, textarea{
     border-radius:8px;
 }
 
-.clear-canvas-bg{
-    background-color: rgb(255, 255, 255);
-}
-
-
-.overlay-outside-modal{
-    position:fixed;
-    top:0;
-    right:0;
-    left:0;
-    bottom:0;
-    background-color: rgba(0, 0, 0, 0.153);
-    z-index:0;
-}
-
-
 
 .hide-while-edit-mode{
     opacity:0;
@@ -752,7 +763,7 @@ input, textarea{
 
 .last-edit-time{
     font-size: 1.4rem;
-    color:rgba(128, 128, 128, 0.917);
+    color:var(--second-font-color);
     align-self: flex-end;
     margin-right:20px;
 }
