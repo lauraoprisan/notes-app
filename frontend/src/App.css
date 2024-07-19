@@ -47,6 +47,7 @@ input, textarea{
 }
 
 
+
 ::placeholder{
     color:var(--second-font-color) !important;
 }
@@ -242,7 +243,9 @@ input, textarea{
     justify-content: flex-start;
     width:100%;
     max-width:600px;
+    /* max-height:70vh; */
 }
+
 
 .create-note-form{
     display:flex;
@@ -250,8 +253,6 @@ input, textarea{
     justify-content: flex-start;
     width:100%;
 }
-
-
 
 .create-note-section input, .create-note-section textarea {
     background-color: transparent;
@@ -285,6 +286,66 @@ input, textarea{
     opacity:1;
 }
 
+
+.create-note-section textarea {
+    display:flex;
+    flex-wrap:wrap;
+    max-height:500px;
+    overflow:hidden;
+    overflow-y:auto;
+}
+
+.edit-mode-note textarea {
+    display:flex;
+    flex-wrap:wrap;
+    max-height:300px;
+    overflow:hidden;
+    overflow-y:auto;
+}
+
+.display-large-text{
+    width: 100%;
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow:hidden;
+}
+
+.display-static-large-text{
+    width: 100%;
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow:hidden;
+    display:flex;
+    flex-wrap:wrap;
+    max-height:300px;
+    overflow:hidden;
+    display: -webkit-box;
+    line-clamp:13;
+    -webkit-line-clamp: 13; /* Number of lines to show */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+/* ^Scrollbar custom */
+textarea::-webkit-scrollbar {
+    width: 3px;
+}
+
+textarea::-webkit-scrollbar-track {
+    background: var(--background-color);
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+/* /Scrollbar custom */
 
 /* /Create note form*/
 
@@ -470,9 +531,11 @@ input, textarea{
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
+    max-height:400px;
     /* position:relative; */
 
 }
+
 
 
 .single-note:hover {
@@ -674,6 +737,11 @@ input, textarea{
 
 /* /Note options*/
 
+.empty-note{
+    font-size: 2.2rem;
+    color:rgb(99, 99, 99);
+}
+
 /* /Single note*/
 
 
@@ -770,6 +838,7 @@ input, textarea{
 
 .edit-mode-note{
     border:none;
+    max-height:90vh;
 }
 .edit-mode-note .note-options-container{
     opacity: 1;
@@ -802,6 +871,16 @@ input, textarea{
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         gap: 10px;
+    }
+}
+
+@media(max-height:520px){
+    .edit-mode-note textarea {
+        display:flex;
+        flex-wrap:wrap;
+        max-height:200px;
+        overflow:hidden;
+        overflow-y:auto;
     }
 }
 
