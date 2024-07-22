@@ -29,9 +29,10 @@ app.use(helmet())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.get("/api/", (req: Request, res: Response) => {
+app.get("/", (req: Request, res: Response) => {
     res.send("Welcome to the backend");
 });
+
 
 app.use("/api/notes", notesRoutes);
 app.use("/api/auth", authRoutes);
