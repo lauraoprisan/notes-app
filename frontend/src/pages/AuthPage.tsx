@@ -82,12 +82,14 @@ const AuthComponent: React.FC = () => {
 						onChange={onChange}
 					/>
 				</div>
-				{!isLoginMode && (
+
+				{/* {!isLoginMode && (
 				<div className="checkbox-container">
 					<input type="checkbox" id="agree-to-terms"/>
 					<label htmlFor="agree-to-terms"> I agree to Notes App terms</label>
 				</div>
-				)}
+				)} */}
+
 				{authError && <p className="error">{authError}</p>}
 				<button
 					type="submit"
