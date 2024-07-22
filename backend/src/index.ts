@@ -14,16 +14,17 @@ const app = express();
 
 const PORT = process.env.PORT || 4000;
 const MONGO_URI = process.env.MONGO_URI as string;
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000'; 
 
+app.use(cors(
+    {
+        origin: [FRONTEND_URL],
+        methods: ["POST", "GET", "PUT", "DELETE"],
+        credentials: true,
+        optionsSuccessStatus: 200,
+    }
+));
 
-
-
-// Configure CORS
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    optionsSuccessStatus: 200, // Some legacy browsers choke on 204
-};
-app.use(cors(corsOptions));
 app.use(helmet())
 
 app.use(express.json());

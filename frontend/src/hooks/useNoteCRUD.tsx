@@ -18,7 +18,7 @@ const useNoteCRUD = () => {
         setIsLoading(true);
         try {
             const token = getAuthToken();
-            const response: AxiosResponse<Note[]> = await axios.get<Note[]>('http://localhost:4000/api/notes', {
+            const response: AxiosResponse<Note[]> = await axios.get<Note[]>(`${process.env.REACT_APP_API_URL}/api/notes`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -38,7 +38,7 @@ const useNoteCRUD = () => {
         setIsLoading(true);
         try {
             const token = getAuthToken();
-            const response: AxiosResponse<Note> = await axios.post<Note>('http://localhost:4000/api/notes', noteData, {
+            const response: AxiosResponse<Note> = await axios.post<Note>(`${process.env.REACT_APP_API_URL}/api/notes`, noteData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -55,7 +55,7 @@ const useNoteCRUD = () => {
         setIsLoading(true);
         try {
             const token = getAuthToken();
-            const response: AxiosResponse<Note> = await axios.put<Note>(`http://localhost:4000/api/notes/${id}`, noteData, {
+            const response: AxiosResponse<Note> = await axios.put<Note>(`${process.env.REACT_APP_API_URL}/api/notes/${id}`, noteData, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 
@@ -71,7 +71,7 @@ const useNoteCRUD = () => {
         setIsLoading(true);
         try {
            const token = getAuthToken();
-            await axios.delete(`http://localhost:4000/api/notes/${id}`, {
+            await axios.delete(`${process.env.REACT_APP_API_URL}/api/notes/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
 

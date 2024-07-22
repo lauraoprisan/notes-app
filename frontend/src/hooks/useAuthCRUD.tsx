@@ -18,7 +18,7 @@ export const useAuthCRUD = () => {
 		const {email, password} = formData
 
 		try {
-			const response: AxiosResponse<User> = await axios.post(`http://localhost:4000/api/auth/login`, {
+			const response: AxiosResponse<User> = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/login`, {
 				email,
 				password,
 			});
@@ -51,7 +51,7 @@ export const useAuthCRUD = () => {
 		setIsLoading(true);
 		const {username, email, password} = formData
 		try {
-			const response: AxiosResponse<User>  = await axios.post(`http://localhost:4000/api/auth/signup`, {
+			const response: AxiosResponse<User>  = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/signup`, {
 				email,
 				password,
 				username,
@@ -89,7 +89,7 @@ export const useAuthCRUD = () => {
 
             const resultsFromGoogle = await signInWithPopup(auth, provider);
 
-            const response: AxiosResponse<User>  = await axios.post(`http://localhost:4000/api/auth/google`, {
+            const response: AxiosResponse<User>  = await axios.post(`${process.env.REACT_APP_API_URL}/api/auth/google`, {
                 email: resultsFromGoogle.user.email,
                 username: resultsFromGoogle.user.displayName,
                 profileImageURL: resultsFromGoogle.user.photoURL
