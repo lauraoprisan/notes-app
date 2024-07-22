@@ -7,9 +7,9 @@
   "scripts": {
     "build:dev": "tsc",
     "start:dev": "npm run build:dev && env-cmd -f .env.development node ./dist/index.js",
-    "build": "npm run build:dev && env-cmd -f .env node ./dist/index.js",
-    "dev": "nodemon src/index.ts",
-    "test": "jest --watchAll --detectOpenHandles"
+    "build": "env-cmd -f .env node ./dist/index.js",
+    "dev": "nodemon  src/index.ts",
+    "test": "jest --watchAll  --detectOpenHandles"
   },
   "author": "",
   "license": "ISC",

@@ -6,11 +6,11 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "strict": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "rootDir": "./src",
     "allowJs": true,
     "resolveJsonModule": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "noImplicitAny": true,
     "sourceMap": true,
 
