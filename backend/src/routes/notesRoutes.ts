@@ -9,15 +9,13 @@ import {
     getNotes,
     addNote,
     updateNote,
-    deleteNote,
-    updateNoteBackground
+    deleteNote
 } from '../controllers/notesController.js';
 
 
 router.get('/', getNotes);
 router.post('/', addNote);
 router.put('/:id', updateNote)
-router.put('/:id/updateNoteBackground', updateNoteBackground)
 router.delete('/:id', deleteNote)
 
 export default router;

@@ -65,31 +65,31 @@ const updateNote = async (req: Request, res: Response) => {
     }
 };
 
-const updateNoteBackground = async (req: Request, res: Response) => {
-    try {
-        const noteId = req.params.id;
-        const { backgroundColor } = req.body;
-        
-        console.log("tryong updateNoteBg ")
-        console.log("noteId : " + noteId)
-        console.log("backgroundColor : " + backgroundColor)
+// const updateNoteBackground = async (req: Request, res: Response) => {
+//     try {
+//         const noteId = req.params.id;
+//         const { backgroundColor } = req.body;
 
-        if (!backgroundColor) {
-            return res.status(400).json({ error: 'Background color is required' });
-        }
+//         console.log("tryong updateNoteBg ")
+//         console.log("noteId : " + noteId)
+//         console.log("backgroundColor : " + backgroundColor)
 
-        const note = await Note.findByIdAndUpdate(noteId, { backgroundColor }, { new: true });
+//         if (!backgroundColor) {
+//             return res.status(400).json({ error: 'Background color is required' });
+//         }
 
-        if (!note) {
-            return res.status(404).json({ error: 'Note not found' });
-        }
+//         const note = await Note.findByIdAndUpdate(noteId, { backgroundColor }, { new: true });
 
-        res.status(200).json(note);
-    } catch (err: any) {
-        console.error(err);
-        res.status(400).json({ error: err.message });
-    }
-};
+//         if (!note) {
+//             return res.status(404).json({ error: 'Note not found' });
+//         }
+
+//         res.status(200).json(note);
+//     } catch (err: any) {
+//         console.error(err);
+//         res.status(400).json({ error: err.message });
+//     }
+// };
 
 const deleteNote = async (req: Request, res: Response) => {
     try {
@@ -116,6 +116,5 @@ export {
     getNotes,
     addNote,
     updateNote,
-    deleteNote,
-    updateNoteBackground
+    deleteNote
 };

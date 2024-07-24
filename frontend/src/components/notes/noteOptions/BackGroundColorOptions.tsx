@@ -26,7 +26,7 @@ export enum ColorOption {
 const BackGroundColorOptions: React.FC<BackGroundColorOptionsProps> = ({note, setNoteBgColorForCreateNoteForm}) => {
 
 	const [openModal, setOpenModal] = useState<boolean>(false)
-	const {changeNoteBackground} = useNoteCRUD();
+	const {putNote} = useNoteCRUD();
 	const noteOptionListItemRef = useRef<HTMLLIElement>(null);
 	const isClickInside = useDetectClickInsideElement(noteOptionListItemRef);
 
@@ -54,7 +54,7 @@ const BackGroundColorOptions: React.FC<BackGroundColorOptionsProps> = ({note, se
             }
 
             if (note) {
-                await changeNoteBackground(note._id, backgroundColor );
+                await putNote(note._id, {backgroundColor} );
             }
 
             // Remove selected-color class from all li elements

@@ -68,22 +68,6 @@ const useNoteCRUD = () => {
         }
     };
 
-    const changeNoteBackground = async (id: string, backgroundColor: ColorOption) => {
-        console.log("trying to change bg color: ", backgroundColor)
-        setIsLoading(true);
-        try {
-            const token = getAuthToken();
-            const response: AxiosResponse<Note> = await axios.put<Note>(`${process.env.REACT_APP_API_URL}/api/notes/${id}/updateNoteBackground`, {backgroundColor}, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-
-            updateNote(response.data);
-        } catch (error) {
-            console.error('Failed to update the note:', error);
-        } finally {
-            setIsLoading(false);
-        }
-    };
 
 
     const deleteNote = async (id: string) => {
@@ -102,7 +86,7 @@ const useNoteCRUD = () => {
         }
     };
 
-    return { getNotes, postNote, putNote, deleteNote, changeNoteBackground, isLoading };
+    return { getNotes, postNote, putNote, deleteNote, isLoading };
 };
 
 export default useNoteCRUD;
