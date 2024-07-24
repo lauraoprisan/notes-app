@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import { useNotesContext } from './useNotesContext';
 import { Note, NoteInput } from '../types';
+import { ColorOption } from '../components/notes/noteOptions/BackGroundColorOptions';
 
 // this hook manages all the CRUD operations on note, managing both DB and the react state management for notes
 const useNoteCRUD = () => {
@@ -67,6 +68,24 @@ const useNoteCRUD = () => {
         }
     };
 
+    const changeNoteBackground = async (id: string, backgroundColor: ColorOption) => {
+        console.log("trying to change bg color: ", backgroundColor)
+        setIsLoading(true);
+        try {
+            const token = getAuthToken();
+            const response: AxiosResponse<Note> = await axios.put<Note>(`${process.env.REACT_APP_API_URL}/api/notes/${id}/updateNoteBackground`, {backgroundColor}, {
+                headers: { Authorization: `Bearer ${token}` }
+            });
+
+            updateNote(response.data);
+        } catch (error) {
+            console.error('Failed to update the note:', error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+
     const deleteNote = async (id: string) => {
         setIsLoading(true);
         try {
@@ -83,7 +102,7 @@ const useNoteCRUD = () => {
         }
     };
 
-    return { getNotes, postNote, putNote, deleteNote, isLoading };
+    return { getNotes, postNote, putNote, deleteNote, changeNoteBackground, isLoading };
 };
 
 export default useNoteCRUD;

@@ -27,8 +27,8 @@ const NoteOptions: React.FC<NoteOptionsProps> = ({note, setNoteBgColorForCreateN
         />
        <MoreOptions
         	note={note}
-			setIsNoteDeletedFromOptions={setIsNoteDeletedFromOptions}
-		/>
+			    setIsNoteDeletedFromOptions={setIsNoteDeletedFromOptions}
+		    />
        {/* <MoreOptions note={note}  /> */}
        {/* <EditBackgroundColor/> */}
 

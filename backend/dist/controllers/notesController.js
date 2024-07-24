@@ -49,6 +49,27 @@ const updateNote = async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 };
+const updateNoteBackground = async (req, res) => {
+    try {
+        const noteId = req.params.id;
+        const { backgroundColor } = req.body;
+        console.log("tryong updateNoteBg ");
+        console.log("noteId : " + noteId);
+        console.log("backgroundColor : " + backgroundColor);
+        if (!backgroundColor) {
+            return res.status(400).json({ error: 'Background color is required' });
+        }
+        const note = await Note.findByIdAndUpdate(noteId, { backgroundColor }, { new: true });
+        if (!note) {
+            return res.status(404).json({ error: 'Note not found' });
+        }
+        res.status(200).json(note);
+    }
+    catch (err) {
+        console.error(err);
+        res.status(400).json({ error: err.message });
+    }
+};
 const deleteNote = async (req, res) => {
     try {
         // console.log("deleteNote controller called")
@@ -64,5 +85,5 @@ const deleteNote = async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 };
-export { getNotes, addNote, updateNote, deleteNote };
+export { getNotes, addNote, updateNote, deleteNote, updateNoteBackground };
 //# sourceMappingURL=notesController.js.map
