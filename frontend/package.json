@@ -11,8 +11,6 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.18.101",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "axios": "^1.7.2",
@@ -31,9 +29,9 @@
   "scripts": {
     "start": "env-cmd -f .env.development react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "vitest",
     "eject": "react-scripts eject",
-    "coverage": "npm test -- --coverage"
+    "coverage": "vitest run -- --coverage"
   },
   "eslintConfig": {
     "extends": [
@@ -54,6 +52,13 @@
     ]
   },
   "devDependencies": {
-    "@types/uuid": "^10.0.0"
+    "@testing-library/dom": "^10.4.0",
+    "@types/node": "^20.14.12",
+    "@types/uuid": "^10.0.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "jsdom": "^24.1.1",
+    "vite": "^5.3.4",
+    "vite-aliases": "^0.11.7",
+    "vitest": "^2.0.4"
   }
 }
