@@ -24,6 +24,10 @@ A TypeScript MERN Stack App that aims to be a combination of Google Keep and Mil
 - Terms of Agreement when signing up for the traditional authentication
 - Drag and drop functionality
 
+## Big problems to be fixed
+- Handle the case when the user makes an update and closes the modal quicker than the debounced time
+- Handle case when the jwt expires
+
 
 ## Tech used
 
