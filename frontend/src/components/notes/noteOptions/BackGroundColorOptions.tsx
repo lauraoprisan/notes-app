@@ -27,6 +27,7 @@ const BackGroundColorOptions: React.FC<BackGroundColorOptionsProps> = ({note, se
 
 	const [openModal, setOpenModal] = useState<boolean>(false)
 	const {putNote} = useNoteCRUD();
+  
 	const noteOptionListItemRef = useRef<HTMLLIElement>(null);
 	const isClickInside = useDetectClickInsideElement(noteOptionListItemRef);
 

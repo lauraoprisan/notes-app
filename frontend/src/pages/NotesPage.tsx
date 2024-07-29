@@ -12,7 +12,7 @@ import useNoteCRUD from '../hooks/useNoteCRUD';
 	const NotesPage = () => {
 		const { user } = useAuthContext()
 		const { getNotes, isLoading } = useNoteCRUD();
-		const { notes } = useNotesContext();
+		const { notes, filteredNotes } = useNotesContext();
 		const [notesToShow, setNotesToShow] = useState<Note[] | null >(null)
 		const [workingOnCreateNoteForm, setWorkingOnCreateNoteForm] = useState<boolean>(false);
 
@@ -39,17 +39,25 @@ import useNoteCRUD from '../hooks/useNoteCRUD';
 		//do not get local notes (from context) while working on the create note form
 		useEffect(() => {
 			if (!workingOnCreateNoteForm) {
-				setNotesToShow(notes)
+				if(filteredNotes){
+					setNotesToShow(filteredNotes)
+				} else {
+					setNotesToShow(notes)
+				}
 			}
-		}, [notes, workingOnCreateNoteForm]);
+
+		}, [notes, workingOnCreateNoteForm, filteredNotes]);
 
 	return (
 		<div className="inside-container">
 			<CreateNoteForm setWorkingOnCreateNoteForm={setWorkingOnCreateNoteForm} />
 			{isLoading && <span>Loading</span>}
+
 			{!isLoading && (
 				<div className="elements-container masonry-grid">
-					{notesToShow?.length === 0 && <p>You have no notes</p>}
+					{filteredNotes?.length===0 ? (				//filteredNotes === [] if the search is done but no results and filteredNotes===null if no search is done
+						 <p>No matching results</p>
+					) : notesToShow?.length === 0 && <p>You have no notes</p>}
 					<Masonry
 					breakpointCols={breakpointColumnsObj}
 					className="my-masonry-grid"
