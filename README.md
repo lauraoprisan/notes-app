@@ -2,7 +2,7 @@
 
 # Notes-app: <a href="https://notes-app-theta-weld.vercel.app/" target="_blank">Visit Here</a>
 <a href="https://notes-app-theta-weld.vercel.app/" target="_blank">
-<img src="https://github.com/lauraoprisan/lauraoprisan/blob/main/media/notes-app.gif" width="100%" alt="Notes APP"/>
+<img src="https://github.com/lauraoprisan/lauraoprisan/blob/main/media/notes-app-2.gif" width="100%" alt="Notes APP"/>
 </a>
 
 A TypeScript MERN Stack App that aims to be a combination of Google Keep and Milanote.
@@ -16,13 +16,13 @@ A TypeScript MERN Stack App that aims to be a combination of Google Keep and Mil
 **Notes Interaction**
 - Create, edit and delete notes
 - Change the background color of each note
+- Search notes by text
 - *Using debouncing to optimize API calls when sending data to the backend*
 
 ## Major points to be implemented next
 - Unit tests
 - Terms of Agreement when signing up for the traditional authentication
 - Drag and drop functionality
-- Search note
 
 
 ## Tech used
