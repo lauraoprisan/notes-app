@@ -7,7 +7,7 @@ import { ColorOption } from '../components/notes/noteOptions/BackGroundColorOpti
 // this hook manages all the CRUD operations on note, managing both DB and the react state management for notes
 const useNoteCRUD = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const { notes, addNote, addNotes, updateNote, removeNote } = useNotesContext();
+    const { notes, addNote, addNotes, updateNote, removeNote, filteredNotes } = useNotesContext();
 
 
     const getAuthToken = () => {
@@ -61,6 +61,7 @@ const useNoteCRUD = () => {
             });
 
             updateNote(response.data);
+
         } catch (error) {
             console.error('Failed to update the note:', error);
         } finally {

@@ -22,7 +22,7 @@ const createToken = (_id: string): string => {
   if (!process.env.JWT_SECRET) {
     throw new Error('JWT_SECRET is not defined in the environment variables');
   }
-  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: '3d' });
+  return jwt.sign({ _id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
 // login a user

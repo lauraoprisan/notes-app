@@ -9,7 +9,8 @@ import {
     getNotes,
     addNote,
     updateNote,
-    deleteNote
+    deleteNote,
+
 } from '../controllers/notesController.js';
 
 
@@ -17,5 +18,6 @@ router.get('/', getNotes);
 router.post('/', addNote);
 router.put('/:id', updateNote)
 router.delete('/:id', deleteNote)
+
 
 export default router;

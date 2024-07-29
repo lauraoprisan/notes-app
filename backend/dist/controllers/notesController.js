@@ -84,5 +84,5 @@ const deleteNote = async (req, res) => {
         res.status(400).json({ error: err.message });
     }
 };
-export { getNotes, addNote, updateNote, deleteNote };
+export { getNotes, addNote, updateNote, deleteNote, };
 //# sourceMappingURL=notesController.js.map
