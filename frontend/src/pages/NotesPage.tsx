@@ -50,7 +50,7 @@ import useNoteCRUD from '../hooks/useNoteCRUD';
 
 	return (
 		<div className="inside-container">
-			<CreateNoteForm setWorkingOnCreateNoteForm={setWorkingOnCreateNoteForm} />
+			{filteredNotes === null && <CreateNoteForm setWorkingOnCreateNoteForm={setWorkingOnCreateNoteForm} />}
 			{isLoading && <span>Loading</span>}
 
 			{!isLoading && (
