@@ -1,9 +1,7 @@
 
 
-# Notes-app: <a href="https://notes-app-theta-weld.vercel.app/" target="_blank">Visit Here</a>
-<a href="https://notes-app-theta-weld.vercel.app/" target="_blank">
+# Notes-app
 <img src="https://github.com/lauraoprisan/lauraoprisan/blob/main/media/notes-app-2.gif" width="100%" alt="Notes APP"/>
-</a>
 
 A TypeScript MERN Stack App that aims to be a combination of Google Keep and Milanote.
 
